@@ -1,0 +1,117 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+/*div[class*='col-'] img.poster {
+  height: 345px;
+}
+div[class*='col-'] img.profile {
+  height: 224px;
+}
+*/
+.caption h5, .caption h6 {
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/*ISOTOPE*/
+.item { width: 20%; 
+  padding: 2%;
+  min-width:150px ;
+}
+.profile-item {
+  padding: 2%;
+  min-width: 50px ;
+}
+@media(max-width: 767px) { /*x-small screen*/
+  .profile-item {
+   width: 30%;
+   }
+   .item { 
+    width: 30%; 
+    }
+}
+  @media  (max-width: 991px) and (min-width: 768px)   { /*small screen*/
+
+   .profile-item {
+      width: 20%;
+    }
+    .item { 
+    width: 25%; 
+    }
+  }
+
+  @media(min-width: 992px) { /*med/lg screen*/
+ .profile-item {
+   width: 15%;
+   
+  }
+  .item { 
+    width: 20%; 
+  }
+ } 
+ /**** Isotope Filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+ 
