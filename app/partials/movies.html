@@ -9,7 +9,10 @@
 					<h6>Released: {{result.release_date}}</h6>
 					<p>
 						<a ng-href="#/details/{{result.id}}" class="btn btn-primary" role="button">View Details</a>
-						<button ng-click="addFavorite(result);" class="btn btn-primary" ng:show="!result.favorite");">Add Fav</button>
+					</p>
+					<p>
+						<button ng-click="addFavorite(result);" class="btn btn-default" ng:show="!result.favorite"><span class="glyphicon glyphicon-star-empty"></span></button>
+						<button ng-click="removeFavorite(result);" class="btn btn-default" ng:show="result.favorite"><span class="glyphicon glyphicon-star"></span> Remove</button>
 					</p>
 				</div>	
 			</div>

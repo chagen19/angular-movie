@@ -15,8 +15,9 @@ var movieControllers = angular.module('movieControllers', [])
 		
 		$scope.addFavorite = function(fav) {
 			console.log("Adding Favorite");
-			$http.post("http://localhost:3000/profile/fav/1", fav).success(function(data) {
-				console.log("Favorite Added");
+			$http.put("http://localhost:3000/profile/1", fav).success(function(data) {
+				console.log(fav.title + " added to favorites!");
+				fav.favorite=true;
 			});
 		};
 	}])
@@ -34,6 +35,15 @@ var movieControllers = angular.module('movieControllers', [])
 			$scope.total = favorites.length;
 			$scope.orderProp = 'release_date';
 		});
+
+		$scope.removeFavorite = function(fav) {
+			console.log("Removing Favorite");
+			$http.delete("http://localhost:3000/profile/1/favorite/" + fav.id).success(function(data) {
+				console.log(fav.title + " removed from favorites!");
+			});
+			var index = $scope.results.indexOf(fav);
+			$scope.results.splice(index, 1);
+		};
 	}])
 .controller("DetailCtrl", ['$rootScope', '$scope', '$http', '$routeParams', '$sce',
 	function($rootScope, $scope, $http, $routeParams, $sce) {
