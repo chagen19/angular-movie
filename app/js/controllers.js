@@ -6,7 +6,6 @@ var movieControllers = angular.module('movieControllers', [])
 
 .controller("SearchCtrl", ['$rootScope', '$scope', '$http', '$routeParams',
 	function($rootScope, $scope, $http, $routeParams) {
-		console.log("here");
 		$http.get("https://api.themoviedb.org/3/search/movie?api_key=013eff1b8075d646416de6ec45620619&query=" + $routeParams.movieName).success(function(data) {
 			$scope.results = data.results;
 			$scope.total = data.total_results;
@@ -14,8 +13,8 @@ var movieControllers = angular.module('movieControllers', [])
 		});
 		
 		$scope.addFavorite = function(fav) {
-			console.log("Adding Favorite");
-			$http.put("http://localhost:3000/profile/1", fav).success(function(data) {
+			fav.source = 'themoviedb';
+			$http.put("http://localhost:3000/profile/54166d47c0edc80000a81de4", fav).success(function(data) {
 				console.log(fav.title + " added to favorites!");
 				fav.favorite=true;
 			});
@@ -29,6 +28,7 @@ var movieControllers = angular.module('movieControllers', [])
 			angular.forEach(favorites, function(fav) {
 				console.log(fav['title'])
 				fav.favorite = true;
+				fav.profileId = data._id;
 				this.push(fav);
 			}, $scope.results);
 			$scope.page = "Favorites";
@@ -37,8 +37,8 @@ var movieControllers = angular.module('movieControllers', [])
 		});
 
 		$scope.removeFavorite = function(fav) {
-			console.log("Removing Favorite");
-			$http.delete("http://localhost:3000/profile/1/favorite/" + fav.id).success(function(data) {
+			console.log("Removing favorite from profile " + fav.profileId);
+			$http.delete("http://localhost:3000/profile/" + fav.profileId + "/favorite/" + fav._id).success(function(data) {
 				console.log(fav.title + " removed from favorites!");
 			});
 			var index = $scope.results.indexOf(fav);
