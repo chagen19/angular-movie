@@ -2,20 +2,19 @@
 	<div class="grid-sizer"></div>
 	<div class="item" isotope-item="isotope-item" ng-repeat="result in results | orderBy:orderProp:true" ng:show="result.poster_path != null">
 		<p>
+			<a ng-href="#/details/{{result.id}}">
 			<div class="thumbnail">
 				<img ng-src="{{url}}w300{{result.poster_path}}" alt="{{result.title}}Poster" class="poster img-responsive">
 				<div class="caption">
 					<h5>{{result.title}}</h5>
 					<h6>Released: {{result.release_date}}</h6>
 					<p>
-						<a ng-href="#/details/{{result.id}}" class="btn btn-primary" role="button">View Details</a>
-					</p>
-					<p>
 						<button ng-click="addFavorite(result);" class="btn btn-default" ng:show="!result.favorite"><span class="glyphicon glyphicon-star-empty"></span> Add</button>
 						<button ng-click="removeFavorite(result);" class="btn btn-default" ng:show="result.favorite"><span class="glyphicon glyphicon-star"></span> Remove</button>
 					</p>
 				</div>	
 			</div>
+		</a>
 		</p>
 	</div>
 	<div id="noResults" ng:show="results == null">

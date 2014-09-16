@@ -25,7 +25,7 @@ var movieControllers = angular.module('movieControllers', [])
 		$timeout(function() {
 			console.log('Re-initiating isotope');
 			$scope.$broadcast('iso-init', {name: null, params: null});
-		}, 100);
+		}, 300);
 	}])
 .controller("FavoritesCtrl", ['$scope', '$http', '$routeParams',
 	function($scope, $http, $routeParams) {
@@ -73,6 +73,6 @@ var movieControllers = angular.module('movieControllers', [])
 		$timeout(function() {
 			console.log('Re-initiating isotope');
 			$scope.$broadcast('iso-init', {name: null, params: null});
-		}, 500);
+		}, 700);
 		});
 	}]);
