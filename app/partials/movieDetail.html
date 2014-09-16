@@ -40,9 +40,9 @@
 							</span>
 						</li>
 					</ul>
-					<h3>Cast</h3>
-					<div id="container" class="row">
-						<div class="profile-item" ng-repeat="cast in movie.credits.cast | limitTo:18 | orderBy:'order'" class="col-xs-2" ng:show="cast.profile_path != null">
+					<h3>Cast</h3> 
+					<div id="container" isotope-container="isotope-container" class="row">
+						<div class="profile-item" isotope-item="isotope-item" ng-repeat="cast in movie.credits.cast | limitTo:18 | orderBy:'order'" class="col-xs-2" ng:show="cast.profile_path != null">
 							<p>
 								<div class="thumbnail">
 									<img ng-src="{{url}}h632{{cast.profile_path}}" alt="{{cast.character}} Poster" class="img-responsive profile">
@@ -63,9 +63,7 @@
 <script type="text/javascript">
 $('#container').imagesLoaded()
   .always( function( instance ) {
-    console.log('all profile images loaded');
     $('#container').isotope({
-	  // options
 	  itemSelector : '.profile-item',
 	  layoutMode : 'fitRows'
 	});

@@ -5,7 +5,8 @@
 angular.module('movieApp', [
   'ngRoute',
   'ngAnimate',
-  'movieControllers'
+  'movieControllers',
+  'iso.directives'
 ]).
 config(['$routeProvider', 
   function($routeProvider) {

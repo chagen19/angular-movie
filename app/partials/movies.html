@@ -1,6 +1,6 @@
-<div id="container">
+<div id="container" isotope-container="isotope-container">
 	<div class="grid-sizer"></div>
-	<div class="item" ng-repeat="result in results | orderBy:orderProp:true" ng:show="result.poster_path != null">
+	<div class="item" isotope-item="isotope-item" ng-repeat="result in results | orderBy:orderProp:true" ng:show="result.poster_path != null">
 		<p>
 			<div class="thumbnail">
 				<img ng-src="{{url}}w300{{result.poster_path}}" alt="{{result.title}}Poster" class="poster img-responsive">
@@ -11,7 +11,7 @@
 						<a ng-href="#/details/{{result.id}}" class="btn btn-primary" role="button">View Details</a>
 					</p>
 					<p>
-						<button ng-click="addFavorite(result);" class="btn btn-default" ng:show="!result.favorite"><span class="glyphicon glyphicon-star-empty"></span></button>
+						<button ng-click="addFavorite(result);" class="btn btn-default" ng:show="!result.favorite"><span class="glyphicon glyphicon-star-empty"></span> Add</button>
 						<button ng-click="removeFavorite(result);" class="btn btn-default" ng:show="result.favorite"><span class="glyphicon glyphicon-star"></span> Remove</button>
 					</p>
 				</div>	
@@ -25,14 +25,11 @@
 </div>
 <script type="text/javascript">
 $('#container').imagesLoaded()
-  .always( function( instance ) {
-    console.log('all images loaded');
-    $('#container').isotope({
-  // options
-  itemSelector : '.item',
-  layoutMode : 'fitRows'
-	});
-    $(window).smartresize();
-  });
-  
+	.always( function( instance ) {
+	    $('#container').isotope({
+		  itemSelector : '.item',
+		  layoutMode : 'fitRows'
+		});
+		$(window).smartresize();
+  	});
 </script>

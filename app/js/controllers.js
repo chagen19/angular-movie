@@ -4,13 +4,14 @@
 
 var movieControllers = angular.module('movieControllers', [])
 
-.controller("SearchCtrl", ['$rootScope', '$scope', '$http', '$routeParams',
-	function($rootScope, $scope, $http, $routeParams) {
+.controller("SearchCtrl", ['$rootScope', '$scope', '$http', '$routeParams', '$timeout',
+	function($rootScope, $scope, $http, $routeParams, $timeout) {
 		$http.get("https://api.themoviedb.org/3/search/movie?api_key=013eff1b8075d646416de6ec45620619&query=" + $routeParams.movieName).success(function(data) {
 			$scope.results = data.results;
 			$scope.total = data.total_results;
 			$scope.orderProp = 'release_date';
 		});
+		
 		
 		$scope.addFavorite = function(fav) {
 			fav.source = 'themoviedb';
@@ -19,6 +20,12 @@ var movieControllers = angular.module('movieControllers', [])
 				fav.favorite=true;
 			});
 		};
+
+		<!-- Fix to delay isotop until images are loaded -->
+		$timeout(function() {
+			console.log('Re-initiating isotope');
+			$scope.$broadcast('iso-init', {name: null, params: null});
+		}, 100);
 	}])
 .controller("FavoritesCtrl", ['$scope', '$http', '$routeParams',
 	function($scope, $http, $routeParams) {
@@ -26,7 +33,7 @@ var movieControllers = angular.module('movieControllers', [])
 		$http.get("http://localhost:3000/profile/1").success(function(data) {
 			var favorites = data.favorites;
 			angular.forEach(favorites, function(fav) {
-				console.log(fav['title'])
+				console.log(fav['title']);
 				fav.favorite = true;
 				fav.profileId = data._id;
 				this.push(fav);
@@ -43,19 +50,29 @@ var movieControllers = angular.module('movieControllers', [])
 			});
 			var index = $scope.results.indexOf(fav);
 			$scope.results.splice(index, 1);
+			$scope.$broadcast('iso-init', {name: null, params: null});
 		};
 	}])
-.controller("DetailCtrl", ['$rootScope', '$scope', '$http', '$routeParams', '$sce',
-	function($rootScope, $scope, $http, $routeParams, $sce) {
+.controller("DetailCtrl", ['$rootScope', '$scope', '$http', '$routeParams', '$sce', '$timeout',
+	function($rootScope, $scope, $http, $routeParams, $sce, $timeout) {
 		$http.get("https://api.themoviedb.org/3/movie/" + $routeParams.movieId + "?api_key=013eff1b8075d646416de6ec45620619&append_to_response=credits,trailers").success(function(data) {
 		$scope.movie = data;
 
 		$scope.setTrailer = function(value) {
-			console.log("Setting trailer to index " + value);
-			$scope.yturl = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + data.trailers.youtube[value].source + "?enablejsapi=0");
-			$scope.trailer = data.trailers.youtube[value];
+			var trailer = data.trailers.youtube[value];
+			if(null != data.trailers.youtube[value] || null) {
+				console.log("Setting trailer to index " + value);
+				$scope.yturl = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + data.trailers.youtube[value].source + "?enablejsapi=0");
+				$scope.trailer = data.trailers.youtube[value];
+			}
 		};
 		$scope.setTrailer(0);
 		$rootScope.movieId = data.id;
+
+		<!-- Fix to delay isotop until images are loaded -->
+		$timeout(function() {
+			console.log('Re-initiating isotope');
+			$scope.$broadcast('iso-init', {name: null, params: null});
+		}, 500);
 		});
 	}]);
