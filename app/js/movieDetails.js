@@ -29,12 +29,13 @@ angular.module('movieApp.details.controllers', [
 				$scope.$broadcast('iso-init', {name: null, params: null});
 			}, 700);
 		});
-	$scope.setTrailer = function(value) {
-		var trailer = data.trailers.youtube[value];
-		if(null != data.trailers.youtube[value] || null) {
-			console.log("Setting trailer to index " + value);
-			$scope.yturl = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + data.trailers.youtube[value].source + "?enablejsapi=0");
-			$scope.trailer = data.trailers.youtube[value];
+	$scope.setTrailer = function(index) {
+		var data = $scope.movie;
+		var trailer = data.trailers.youtube[index];
+		if(null != data.trailers.youtube[index] || null) {
+			console.log("Setting trailer to index " + index);
+			$scope.yturl = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + data.trailers.youtube[index].source + "?enablejsapi=0");
+			$scope.trailer = data.trailers.youtube[index];
 		}
 	};
 }]);
