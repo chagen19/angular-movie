@@ -14,7 +14,8 @@ angular.module('movieApp.favorites', [
 angular.module('movieApp.favorites.controllers', [
 	'movieApp.favorites.services',
 	'ngAnimate',
-  	'iso.directives'
+  	'iso.directives',
+  	'movieApp.shared.directives'
 ]).controller('FavoritesCtrl', ['$scope', '$timeout', 'favoriteService',
 	function($scope, $timeout, favoriteService) {
 		$scope.results = [];
@@ -29,12 +30,6 @@ angular.module('movieApp.favorites.controllers', [
 			$scope.page = "Favorites";
 			$scope.total = favorites.length;
 			$scope.orderProp = 'release_date';
-
-			<!-- Fix to delay isotop until images are loaded -->
-			$timeout(function() {
-				console.log('Re-initiating isotope');
-				$scope.$broadcast('iso-init', {name: null, params: null});
-			}, 100);
 		});
 
 		$scope.removeFavorite = function(fav) {
@@ -48,11 +43,11 @@ angular.module('movieApp.favorites.controllers', [
 
 angular.module('movieApp.favorites.services', [
 ])
-.factory('favoriteService', ['$http', function($http) {
+.factory('favoriteService', ['$rootScope', '$http', function($rootScope, $http) {
 
 	var factory = {};
 	factory.getFavorites = function() {
-		return $http.get("http://localhost:3000/profile/1");
+		return $http.get("http://localhost:3000/profile/" + $rootScope.profileId);
 	};
 
 	factory.removeFavorite = function(fav) {

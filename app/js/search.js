@@ -15,26 +15,20 @@ angular.module('movieApp.search.controllers', [
 	'movieApp.search.services',
 	'movieApp.favorites.services',
 	'ngAnimate',
-  	'iso.directives'
+  	'iso.directives',
+  	'movieApp.shared.directives'
 ]).controller('SearchCtrl', ['$scope', '$timeout', 'searchService', 'favoriteService',
-	function($scope, $timeout, searchService, favoritesService) {
+	function($scope, $timeout, searchService, favoriteService) {
 		searchService.getMovies().success(function(data) {
 			$scope.results = data.results;
 			$scope.total = data.total_results;
 			$scope.orderProp = 'release_date';
-
-			<!-- Fix to delay isotop until images are loaded -->
-			$timeout(function() {
-				console.log('Re-initiating isotope');
-				$scope.$broadcast('iso-init', {name: null, params: null});
-			}, 300);
-
 		});
-		
+
 		$scope.addFavorite = function(fav) {
 			fav.source = 'themoviedb';
 			fav.favorite=true;
-			favoritesService.addFavorite(fav);
+			favoriteService.addFavorite(fav);
 		};
 }]);
 
@@ -46,4 +40,27 @@ angular.module('movieApp.search.services', [
 			return $http.get("https://api.themoviedb.org/3/search/movie?api_key=013eff1b8075d646416de6ec45620619&query=" + $routeParams.movieName);
 		}
 	};
+}]);
+
+angular.module('movieApp.shared.directives', [
+])
+.directive('currentItem', ['$timeout', function($timeout) {
+
+function link(scope, element, attrs) {
+    scope.$watch(attrs.currentItem, function(value) {
+        if(value == scope.results.length) {
+        	<!-- Fix to delay isotop until images are loaded -->
+			$timeout(function() {
+				console.log('Re-initiating isotope');
+				scope.$emit('iso-init', {name: null, params: null});
+			}, 500);
+        }
+    });
+
+}
+
+ return {
+      link: link
+    };
+
 }]);
