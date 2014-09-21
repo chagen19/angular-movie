@@ -6,7 +6,7 @@ angular.module('movieApp.search', [
 ])
 .config(['$routeProvider', function($routeProvider){
 	 $routeProvider.when('/search/:movieName', {
-      templateUrl: 'partials/movies.html', 
+      templateUrl: 'partials/movies.html',
       controller: 'SearchCtrl'
     });
 }]);
@@ -47,8 +47,10 @@ angular.module('movieApp.shared.directives', [
 .directive('currentItem', ['$timeout', function($timeout) {
 
 function link(scope, element, attrs) {
+
+	console.log("Chad");
     scope.$watch(attrs.currentItem, function(value) {
-        if(value == scope.results.length) {
+    	if(value == scope.results.length-1) {
         	<!-- Fix to delay isotop until images are loaded -->
 			$timeout(function() {
 				console.log('Re-initiating isotope');
