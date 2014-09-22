@@ -1,0 +1,89 @@
+<div class="row">
+	<div class="col-xs-12">
+		<h3>{{movie.title}}</h3>
+		<h5>{{movie.tagline}}</h5>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+						<div class="row">
+						<div class="col-xs-12">
+							<span ng:show="movie.backdrop_path != null">
+								<img ng-src="{{url}}w1280{{movie.backdrop_path}}" class="img-responsive" >
+								<p class="text-left">
+									<a href="" ng-href="{{url}}w1280{{movie.backdrop_path}}">{{url}}w1280{{movie.backdrop_path}}
+									</a>
+								</p>
+							</span>
+							<br>
+							<ul class="list-inline">
+								<li ng-repeat="genre in movie.genres">
+									<span class="label label-primary">
+										{{genre.name}}
+									</span>
+								</li>
+							</ul>
+							<a href="{{movie.homepage}}">{{movie.homepage}}</a>
+							<h3>Overview</h3>
+							<p>{{movie.overview}}</p>
+						</div>
+						</div>
+						<div class="row" ng:show="trailer.source != null">
+							<div class="col-xs-8">
+								<h3>Trailers</h3>
+								
+									<div class="dropdown">
+										<button id="dLabel" class="btn btn-default" data-toggle="dropdown">
+											{{trailer.name}} <span class="caret"></span>
+										</button>
+										<span class="label label-default">{{trailer.size}}</span>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+											<li ng-repeat="t in movie.trailers.youtube">
+												<span class="hand" ng-click="setTrailer($index)">
+													{{t.name}}
+												</span>
+											</li>
+										</ul>
+									</div>
+								<p ng:show="trailer.source != null">
+									<div class="embed-responsive embed-responsive-16by9">
+										<iframe class="embed-responsive-item" id="player" type="text/html"
+										ng-src="{{yturl}}" frameborder="1"></iframe>
+									</div>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<h3>Cast</h3> 
+								<div id="container" isotope-container="isotope-container" class="row">
+									<div class="profile-item" isotope-item="isotope-item" ng-repeat="cast in movie.credits.cast | limitTo:18 | orderBy:'order'" class="col-xs-2" ng:show="cast.profile_path != null">
+											<div class="thumbnail">
+												<img ng-src="{{url}}h632{{cast.profile_path}}" alt="{{cast.character}} Poster" class="img-responsive profile">
+												<div class="caption">
+													<h5>{{cast.name}}</h5>
+													<h6>as {{cast.character}}</h6>
+												</div>	
+											</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+	</div>
+</div>
+
+		<script type="text/javascript">
+		$('#container').imagesLoaded()
+		.always( function( instance ) {
+			$('#container').isotope({
+				itemSelector : '.profile-item',
+				layoutMode : 'fitRows'
+			});
+			$(window).smartresize();
+		});
+
+		</script>

@@ -1,0 +1,33 @@
+<div id="container" isotope-container="isotope-container">
+	<div class="grid-sizer"></div>
+	<div class="item" isotope-item="isotope-item" ng-repeat="result in results | orderBy:orderProp:true" ng:show="result.poster_path != null">
+		<p current-item='$index'>
+			<div class="thumbnail">
+				<img ng-src="{{url}}w300{{result.poster_path}}" ng-click="go('/details/' + result.id)" alt="{{result.title}}Poster" class="poster img-responsive hand">
+				<div class="caption">
+					<h5>{{result.title}}</h5>
+					<h6>Released: {{result.release_date}}</h6>
+					<p>
+						<button ng-click="addFavorite(result);" class="btn btn-default" ng:show="!result.favorite"><span class="glyphicon glyphicon-star-empty"></span> Add</button>
+						<button ng-click="removeFavorite(result);" class="btn btn-default" ng:show="result.favorite"><span class="glyphicon glyphicon-star"></span> Remove</button>
+					</p>
+				</div>	
+			</div>
+		</p>
+	</div>
+	<div id="noResults" ng:show="null == results">
+		No Results Found
+	</div>
+
+</div>
+<script type="text/javascript">
+$('#container').imagesLoaded()
+	.always( function( instance ) {
+		console.log("All Images Loaded");
+	    $('#container').isotope({
+		  itemSelector : '.item',
+		  layoutMode : 'fitRows'
+		});
+		$(window).smartresize();
+  	});
+</script>
