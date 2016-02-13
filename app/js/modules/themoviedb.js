@@ -9,10 +9,10 @@ angular.module('movieApp.theMovieDB', [
       templateUrl: 'views/movies.html',
       controller: 'SearchCtrl'
     });
-		$routeProvider.when('/details/:movieId', {
-				templateUrl: 'views/movieDetail.html',
-				controller: 'DetailCtrl'
-			});
+	$routeProvider.when('/details/:movieId', {
+			templateUrl: 'views/movieDetail.html',
+			controller: 'DetailCtrl'
+		});
 }]);
 
 angular.module('movieApp.theMovieDB.controllers', [
@@ -22,8 +22,8 @@ angular.module('movieApp.theMovieDB.controllers', [
 	'ngAnimate',
   'iso.directives'
 ])
-.controller('SearchCtrl', ['$scope', '$timeout', 'theMovieDBService', 'favoriteService',
-	function($scope, $timeout, theMovieDBService, favoriteService) {
+.controller('SearchCtrl', ['$rootScope', '$scope', '$timeout', 'theMovieDBService', 'favoriteService',
+	function($rootScope, $scope, $timeout, theMovieDBService, favoriteService) {
 		theMovieDBService.getMovies().success(function(data) {
 			$scope.results = data.results;
 			$scope.total = data.total_results;
@@ -32,8 +32,16 @@ angular.module('movieApp.theMovieDB.controllers', [
 
 		$scope.addFavorite = function(fav) {
 			fav.source = 'themoviedb';
-			fav.favorite=true;
-			favoriteService.addFavorite(fav);
+			favoriteService.addFavorite(fav, function() {
+				$rootScope.refreshFavorites();
+			});
+		};
+		$scope.removeFavorite = function(movie) {
+			var fav = $rootScope.favorites[movie.id];
+			favoriteService.removeFavorite(fav, function() {
+				$rootScope.refreshFavorites();
+			});
+			
 		};
 }])
 .controller('DetailCtrl', ['$rootScope', '$scope', '$sce', '$timeout', 'theMovieDBService',
