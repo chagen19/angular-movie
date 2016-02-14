@@ -29,7 +29,6 @@ config(['$routeProvider', function($routeProvider) {
         favoriteService.getFavorites().success(function(data) {
           $rootScope.favorites = {};
           var favs = data.favorites;
-          
           for (var i = 0, len = favs.length; i < len; i++) {
             console.log("Loading favorite ",favs[i].id);
             $rootScope.favorites[favs[i].id] = favs[i];

@@ -216,6 +216,7 @@ angular.module("iso.controllers", ["iso.config", "iso.services"])
           return text;
         }
       };
+      $elem = angular.element($elem);  // THIS LINE FIXES IT
       item = $elem.find(selector);
       text = getText($elem, item, selector);
       val = toType(text, type);

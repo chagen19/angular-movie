@@ -33,7 +33,8 @@ angular.module('movieApp.favorites.controllers', [
 			}, $scope.results);
 		$scope.page = "Favorites";
 		$scope.total = $scope.results.length;
-		$scope.orderProp = 'release_date';
+		$scope.orderProp = 'title';
+		$scope.sortReverse = false;
 	});
 		$scope.removeFavorite = function(fav) {
 			console.log("FAV", fav);
@@ -48,6 +49,20 @@ angular.module('movieApp.favorites.controllers', [
 				$scope.$broadcast('iso-init', {name: null, params: null});
 			});
 		};
+		$scope.setSortOrder = function(value) {
+			console.log("Setting sortBy ", value,  $scope.sortReverse );
+			
+			var sortAscending=true;
+			// If same sort value, use previous descending flag which should be the current ascending flag
+			if (value == $scope.orderProp) {
+				sortAscending = $scope.sortReverse;		
+			} 
+			$scope.orderProp = value;
+			$scope.$emit('iso-option', { sortBy: ['opt.' + value], sortAscending: sortAscending });
+			$scope.sortReverse = !sortAscending;
+			
+		}
+
 }]);
 
 angular.module('movieApp.favorites.services', [
