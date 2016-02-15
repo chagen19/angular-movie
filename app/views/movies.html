@@ -1,23 +1,35 @@
-  <div class="alert alert-info">
-    <p>Ordering by '{{ orderProp }}' in {{sortReverse ? 'descending' : 'ascending'}} order.  </p>
+  <div ng:show="debug" class="alert alert-info">
+    <p><i class="fa fa-info-circle"></i> Ordering by '{{ orderProp }}' in {{sortReverse ? 'descending' : 'ascending'}} order.  </p>
   </div>
-    <div class="btn-group" opt-kind="" ok-key="sortBy">
-	    <button type="button" class="btn btn-default active" ok-sel=".title"  ng-click="setSortOrder('title')">Title</button>
-	 	<button type="button" class="btn btn-default" ok-sel=".release_date" ng-click="setSortOrder('release_date')">Release Date</button>
+  <div class="btn-group" opt-kind="" ok-key="sortBy">
+	    <button type="button" class="btn btn-default active" ok-sel=".title"  ng-click="setSortOrder('title')">
+		<span ng-show="orderProp == 'title' && !sortReverse" class="fa fa-sort-alpha-asc"></span>
+        <span ng-show="orderProp == 'title' && sortReverse" class="fa fa-sort-alpha-desc"></span>
+        Title
+	    </button>
+	 	<button type="button" class="btn btn-default" ok-sel=".release_date" ng-click="setSortOrder('release_date')">
+	 	<span ng-show="orderProp == 'release_date' && !sortReverse" class="fa fa-sort-numeric-asc"></span>
+        <span ng-show="orderProp == 'release_date' && sortReverse" class="fa fa-sort-numeric-desc"></span>
+        Release Date</button>
+        <button type="button" class="btn btn-default" ok-sel=".vote_average" ng-click="setSortOrder('vote_average')">
+	 	<span ng-show="orderProp == 'vote_average' && !sortReverse" class="fa fa-sort-numeric-asc"></span>
+        <span ng-show="orderProp == 'vote_average' && sortReverse" class="fa fa-sort-numeric-desc"></span>
+        Rating</button>
 	</div>
-<div id="container" isotope-container="isotope-container">
+<div id="container" class="isotope" isotope-container="isotope-container">
 	<div class="grid-sizer"></div>
-	<div class="item" isotope-item="isotope-item" ng-repeat="result in results | orderBy:orderProp:sortReverse" ng:show="result.poster_path != null">
-		<p current-item='{{$index}}'>
+	<div class="item isotope-item" isotope-item="isotope-item" ng-repeat="result in results | orderBy:orderProp:sortReverse track by result.id" ng:show="result.poster_path != null">
+		<p current-item='{{$index}}' total-results="{{total}}">
 			<div class="thumbnail">
 				<img ng-src="{{url}}w300{{result.poster_path}}" ng-click="go('/details/' + result.id)" alt="{{result.title}}Poster" class="poster img-responsive hand">
 				<div class="caption" >
-					<h5 class="title">{{result.title}}</h5>
+					<span title="{{result.title}}"><h5 class="title">{{result.title}}</h5></span>
+					<h6 class="vote_average">Rating: {{result.vote_average|| '0'}} / 10</h6>
 					<h6 class="release_date">Released: {{result.release_date}}</h6>
-					<p>
-						<button ng-click="addFavorite(result);" class="btn btn-default" ng:show="!favorites[result.id]"><span class="glyphicon glyphicon-star-empty"></span> Add</button>
-						<button ng-click="removeFavorite(result);" class="btn btn-default" ng:show="favorites[result.id]"><span class="glyphicon glyphicon-star"></span> Remove</button>
-					</p>
+					<div class="text-center">
+						<button ng-click="addFavorite(result);" class="btn btn-default btn-block" ng:show="!favorites[result.id]"><span class="glyphicon glyphicon-star-empty"></span> Add</button>
+						<button ng-click="removeFavorite(result);" class="btn btn-default btn-block" ng:show="favorites[result.id]"><span class="glyphicon glyphicon-star"></span> Remove</button>
+					</div>
 				</div>	
 			</div>
 		</p>

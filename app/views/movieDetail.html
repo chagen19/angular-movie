@@ -1,3 +1,8 @@
+<!-- <div class="row">
+	<div class="col-xs-4">
+		<highchart id="chart1" config="chartConfig" class="span10"></highchart>
+	</div> -->
+</div>
 <div class="row">
 	<div class="col-xs-12">
 		<h3>{{movie.title}}</h3>
@@ -39,10 +44,10 @@
 											{{trailer.name}} <span class="caret"></span>
 										</button>
 										<span class="label label-default">{{trailer.size}}</span>
-										<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-											<li ng-repeat="t in movie.trailers.youtube">
+										<ul class="dropdown-menu">
+											<li ng-repeat="t in movie.trailers.youtube | orderBy:'name'">
 												<span class="hand" ng-click="setTrailer($index)">
-													{{t.name}}
+													<i class="fa fa-youtube"></i> {{t.name}}
 												</span>
 											</li>
 										</ul>
@@ -58,8 +63,8 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<h3>Cast</h3> 
-								<div id="container" isotope-container="isotope-container" class="row">
-									<div class="profile-item" isotope-item="isotope-item" ng-repeat="cast in movie.credits.cast | limitTo:18 | orderBy:'order'" class="col-xs-2" ng:show="cast.profile_path != null">
+								<div id="container isotope" isotope-container="isotope-container" class="row">
+									<div class="profile-item isotope-item" isotope-item="isotope-item" ng-repeat="cast in movie.credits.cast | limitTo:18 | orderBy:'order'" class="col-xs-2" ng:show="cast.profile_path != null">
 											<div class="thumbnail">
 												<img ng-src="{{url}}h632{{cast.profile_path}}" alt="{{cast.character}} Poster" class="img-responsive profile">
 												<div class="caption">

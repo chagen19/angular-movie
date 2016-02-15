@@ -6,7 +6,8 @@ angular.module('movieApp', [
   'ngRoute',
   'movieApp.favorites',
   'movieApp.theMovieDB',
-  'iso.directives'
+  'iso.directives',
+  'highcharts-ng'
 ]).
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({
@@ -19,6 +20,7 @@ config(['$routeProvider', function($routeProvider) {
   			$rootScope.url = data.images.base_url;
       });
       $rootScope.tid=0;
+      $rootScope.debug=true;
       $rootScope.profileId = 1;
       $rootScope.favorites = {};
       
@@ -30,7 +32,6 @@ config(['$routeProvider', function($routeProvider) {
           $rootScope.favorites = {};
           var favs = data.favorites;
           for (var i = 0, len = favs.length; i < len; i++) {
-            console.log("Loading favorite ",favs[i].id);
             $rootScope.favorites[favs[i].id] = favs[i];
           }
         });

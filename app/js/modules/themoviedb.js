@@ -25,10 +25,10 @@ angular.module('movieApp.theMovieDB.controllers', [
 .controller('SearchCtrl', ['$rootScope', '$scope', '$timeout', 'theMovieDBService', 'favoriteService',
 	function($rootScope, $scope, $timeout, theMovieDBService, favoriteService) {
 		theMovieDBService.getMovies().success(function(data) {
-			$scope.results = data.results;
-			$scope.total = data.total_results;
+			$scope.total = data.results.length;
 			$scope.orderProp = 'title';
 			$scope.sortReverse = false;
+			$scope.results = data.results;
 		});
 
 		$scope.addFavorite = function(fav) {
@@ -44,16 +44,15 @@ angular.module('movieApp.theMovieDB.controllers', [
 			});
 		};
 		$scope.setSortOrder = function(value) {
-			console.log("Setting sortBy ", value,  $scope.sortReverse );
-			
 			var sortAscending=true;
 			// If same sort value, use previous descending flag which should be the current ascending flag
 			if (value == $scope.orderProp) {
 				sortAscending = $scope.sortReverse;		
 			} 
+			console.log("Sorting by ", value,  ", ascending ",sortAscending);
 			$scope.orderProp = value;
-			$scope.$emit('iso-option', { sortBy: ['opt.' + value], sortAscending: sortAscending });
 			$scope.sortReverse = !sortAscending;
+			$scope.$emit('iso-option', { sortBy: ['opt.' + value], sortAscending: sortAscending });
 			
 		}
 }])
@@ -69,16 +68,71 @@ angular.module('movieApp.theMovieDB.controllers', [
 				console.log('Re-initiating isotope');
 				$scope.$broadcast('iso-init', {name: null, params: null});
 			}, 700);
+			loadChart();
 		});
 	$scope.setTrailer = function(index) {
-		var data = $scope.movie;
-		var trailer = data.trailers.youtube[index];
-		if(null != data.trailers.youtube[index] || null) {
+		var trailer = $scope.movie.trailers.youtube[index];
+		if(null != trailer || null) {
 			console.log("Setting trailer to index " + index);
-			$scope.yturl = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + data.trailers.youtube[index].source + "?enablejsapi=0");
-			$scope.trailer = data.trailers.youtube[index];
+			$scope.yturl = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + trailer.source + "?enablejsapi=0");
+			$scope.trailer = trailer;
 		}
 	};
+	function loadChart() {
+$scope.chartConfig = {
+        options: {
+            chart: {
+                type: 'solidgauge',
+                height: 200
+            },
+            pane: {
+                center: ['50%', '50%'],
+                size: '100%',
+                startAngle: -90,
+                endAngle: 90,
+                background: {
+                    backgroundColor:'#EEE',
+                    innerRadius: '60%',
+                    outerRadius: '100%',
+                    shape: 'arc'
+                }
+            },
+            solidgauge: {
+                dataLabels: {
+                    y: 5,
+                    borderWidth: 0,
+                    useHTML: true
+                }
+            }
+        },
+        series: [{
+            data: [$scope.movie.vote_average],
+            dataLabels: {
+	        	format: '<div style="text-align:center"><span style="font-size:12px;color:black">{y}/10</span></div>'
+	        }
+        }],
+        title: {
+            text: 'Average Rating'
+        },
+        yAxis: {
+            currentMin: 0,
+            currentMax: 10,    
+			stops: [
+                [0.1, '#DF5353'], // red
+	        	[0.5, '#DDDF0D'], // yellow
+	        	[0.9, '#55BF3B'] // green
+			],
+			lineWidth: 0,
+            minorTickInterval: null,
+            tickPixelInterval: 400,
+            tickWidth: 0,
+            labels: {
+                y: 16
+            }
+        },
+        loading: false
+    }
+}
 }]);
 
 angular.module('movieApp.theMovieDB.services', [
@@ -93,7 +147,10 @@ angular.module('movieApp.theMovieDB.services', [
 		},
 		getConfigurationData : function() {
 			return $http.get(apiUrl + "/configuration?api_key=" + apiKey);
-		}
+		},
+		getMovieById : function(movieId) {
+			return $http.get(apiUrl + "/movie/" + movieId + "?api_key=" + apiKey);
+		},
 	}
 }]);
 
@@ -103,10 +160,10 @@ angular.module('movieApp.shared.directives', [
 
 function link(scope, element, attrs) {
     scope.$watch(attrs.currentItem, function(value) {
-    	if(value == scope.results.length-1) {
+    	if(value == attrs.totalResults-1) {
         	<!-- Fix to delay isotop until images are loaded -->
 			$timeout(function() {
-				console.log('Re-initiating isotope');
+				console.log('Re-initiating isotope for item', value);
 				scope.$emit('iso-init', {name: null, params: null});
 			}, 500);
         }

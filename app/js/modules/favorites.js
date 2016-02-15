@@ -13,33 +13,34 @@ angular.module('movieApp.favorites', [
 
 angular.module('movieApp.favorites.controllers', [
 	'movieApp.favorites.services',
+	'movieApp.theMovieDB.services',
 	'ngAnimate',
   	'iso.directives'
-]).controller('FavoritesCtrl', ['$rootScope', '$scope', '$timeout', 'favoriteService',
-	function($rootScope, $scope, $timeout, favoriteService) {
+]).controller('FavoritesCtrl', ['$rootScope', '$scope', '$timeout', 'favoriteService','theMovieDBService',
+	function($rootScope, $scope, $timeout, favoriteService, theMovieDBService) {
+		var results = [];
 		$scope.results = [];
-		// var favs = $rootScope.favorites;
-		// console.log("Getting Favs?", favs);
-		// angular.forEach(Object.keys(favs), function(key,index) {
-		//    this.push(favs[key]);
-		// }, $scope.results);
+		console.log("Retrieving Favorites");
 		favoriteService.getFavorites().success(function(data) {
-			var favorites = data.favorites;
-			angular.forEach(favorites, function(fav) {
-				console.log(fav['title']);
-				fav.favorite = true;
-				fav.profileId = data._id;
-				this.push(fav);
-			}, $scope.results);
+			$scope.total = data.favorites.length;
+			angular.forEach(data.favorites, function(fav, index) {
+				theMovieDBService.getMovieById(fav.id).success(function(data) {
+					results.push(data);
+					// Set results after they all have been loaded
+					if(index==$scope.total-1) {
+						$scope.results = results;
+					}
+				});
+				
+			});
 		$scope.page = "Favorites";
-		$scope.total = $scope.results.length;
 		$scope.orderProp = 'title';
 		$scope.sortReverse = false;
 	});
 		$scope.removeFavorite = function(fav) {
 			console.log("FAV", fav);
 			var results = $scope.results;
-			favoriteService.removeFavorite(fav, function(data) {
+			favoriteService.removeFavorite($rootScope.favorites[fav.id], function(data) {
 				var removeIndex = results.map(function(item) { return item.id; })
                        .indexOf(fav.id);
 
@@ -50,16 +51,16 @@ angular.module('movieApp.favorites.controllers', [
 			});
 		};
 		$scope.setSortOrder = function(value) {
-			console.log("Setting sortBy ", value,  $scope.sortReverse );
 			
 			var sortAscending=true;
 			// If same sort value, use previous descending flag which should be the current ascending flag
 			if (value == $scope.orderProp) {
 				sortAscending = $scope.sortReverse;		
 			} 
+			console.log("Sorting by ", value,  ", ascending ",sortAscending);
 			$scope.orderProp = value;
-			$scope.$emit('iso-option', { sortBy: ['opt.' + value], sortAscending: sortAscending });
 			$scope.sortReverse = !sortAscending;
+			$scope.$emit('iso-option', { sortBy: ['opt.' + value], sortAscending: sortAscending });
 			
 		}
 
