@@ -7,6 +7,7 @@ angular.module('movieApp', [
   'movieApp.favorites',
   'movieApp.theMovieDB',
   'iso.directives',
+  'ui.bootstrap',
   'highcharts-ng'
 ]).
 config(['$routeProvider', function($routeProvider) {
@@ -20,7 +21,7 @@ config(['$routeProvider', function($routeProvider) {
   			$rootScope.url = data.images.base_url;
       });
       $rootScope.tid=0;
-      $rootScope.debug=true;
+      $rootScope.debug=false;
       $rootScope.profileId = 1;
       $rootScope.favorites = {};
       

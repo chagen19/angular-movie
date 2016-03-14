@@ -10,7 +10,7 @@ angular.module('movieApp.theMovieDB', [
       controller: 'SearchCtrl'
     });
 	$routeProvider.when('/details/:movieId', {
-			templateUrl: 'views/movieDetail.html',
+			templateUrl: 'views/movie-details.html',
 			controller: 'DetailCtrl'
 		});
 }]);
@@ -24,12 +24,14 @@ angular.module('movieApp.theMovieDB.controllers', [
 ])
 .controller('SearchCtrl', ['$rootScope', '$scope', '$timeout', 'theMovieDBService', 'favoriteService',
 	function($rootScope, $scope, $timeout, theMovieDBService, favoriteService) {
-		theMovieDBService.getMovies().success(function(data) {
-			$scope.total = data.results.length;
-			$scope.orderProp = 'title';
-			$scope.sortReverse = false;
-			$scope.results = data.results;
-		});
+	
+		$scope.search = function() {
+			theMovieDBService.getMovies().success(function(data) {
+				$scope.total = data.results.length;
+				$scope.total_results = data.total_results;
+				$scope.results = data.results;
+			});
+		};
 
 		$scope.addFavorite = function(fav) {
 			fav.source = 'themoviedb';
@@ -43,7 +45,32 @@ angular.module('movieApp.theMovieDB.controllers', [
 				$rootScope.refreshFavorites();
 			});
 		};
-		$scope.setSortOrder = function(value) {
+		$scope.search();
+		
+}])
+.controller('DetailCtrl', ['$rootScope', '$scope', '$sce', '$timeout', 'theMovieDBService',
+	function($rootScope, $scope, $sce, $timeout, theMovieDBService) {
+		theMovieDBService.getMovieDetails().success(function(data) {
+			$scope.movie = data;
+			$rootScope.movieId = data.id;
+
+			<!-- Fix to delay isotop until images are loaded -->
+			$timeout(function() {
+				console.log('Re-initiating isotope');
+				$scope.$broadcast('iso-init', {name: null, params: null});
+			}, 700);
+		});
+}])
+.controller('SortController', ['$scope', function($scope) {
+	$scope.sortedAsc = function(column) {
+		return $scope.orderProp == column && !$scope.sortReverse;
+	};
+
+	$scope.sortedDesc = function(column) {
+		return $scope.orderProp == column && $scope.sortReverse;
+	};
+
+	$scope.setSortOrder = function(value) {
 			var sortAscending=true;
 			// If same sort value, use previous descending flag which should be the current ascending flag
 			if (value == $scope.orderProp) {
@@ -53,86 +80,10 @@ angular.module('movieApp.theMovieDB.controllers', [
 			$scope.orderProp = value;
 			$scope.sortReverse = !sortAscending;
 			$scope.$emit('iso-option', { sortBy: ['opt.' + value], sortAscending: sortAscending });
-			
-		}
-}])
-.controller('DetailCtrl', ['$rootScope', '$scope', '$sce', '$timeout', 'theMovieDBService',
-	function($rootScope, $scope, $sce, $timeout, theMovieDBService) {
-		theMovieDBService.getMovieDetails().success(function(data) {
-			$scope.movie = data;
-			$scope.setTrailer(0);
-			$rootScope.movieId = data.id;
-
-			<!-- Fix to delay isotop until images are loaded -->
-			$timeout(function() {
-				console.log('Re-initiating isotope');
-				$scope.$broadcast('iso-init', {name: null, params: null});
-			}, 700);
-			loadChart();
-		});
-	$scope.setTrailer = function(index) {
-		var trailer = $scope.movie.trailers.youtube[index];
-		if(null != trailer || null) {
-			console.log("Setting trailer to index " + index);
-			$scope.yturl = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + trailer.source + "?enablejsapi=0");
-			$scope.trailer = trailer;
-		}
 	};
-	function loadChart() {
-$scope.chartConfig = {
-        options: {
-            chart: {
-                type: 'solidgauge',
-                height: 200
-            },
-            pane: {
-                center: ['50%', '50%'],
-                size: '100%',
-                startAngle: -90,
-                endAngle: 90,
-                background: {
-                    backgroundColor:'#EEE',
-                    innerRadius: '60%',
-                    outerRadius: '100%',
-                    shape: 'arc'
-                }
-            },
-            solidgauge: {
-                dataLabels: {
-                    y: 5,
-                    borderWidth: 0,
-                    useHTML: true
-                }
-            }
-        },
-        series: [{
-            data: [$scope.movie.vote_average],
-            dataLabels: {
-	        	format: '<div style="text-align:center"><span style="font-size:12px;color:black">{y}/10</span></div>'
-	        }
-        }],
-        title: {
-            text: 'Average Rating'
-        },
-        yAxis: {
-            currentMin: 0,
-            currentMax: 10,    
-			stops: [
-                [0.1, '#DF5353'], // red
-	        	[0.5, '#DDDF0D'], // yellow
-	        	[0.9, '#55BF3B'] // green
-			],
-			lineWidth: 0,
-            minorTickInterval: null,
-            tickPixelInterval: 400,
-            tickWidth: 0,
-            labels: {
-                y: 16
-            }
-        },
-        loading: false
-    }
-}
+
+	$scope.setSortOrder('title');
+
 }]);
 
 angular.module('movieApp.theMovieDB.services', [
@@ -168,13 +119,39 @@ function link(scope, element, attrs) {
 			}, 500);
         }
     });
-
 }
 
  return {
       link: link
     };
 
+}])
+.directive('trailersSection', ['$sce', function($sce) {
+
+	return {
+		restrict: 'E',
+		 scope: {
+		 		movie: "="
+		 },
+		templateUrl: 'views/components/trailers-section.html',
+		controller: function($scope, $element, $attrs) {
+			$scope.$watch(function($scope) { return $scope.movie;}, function(value) {
+				if(value !== undefined) {
+					$scope.setTrailer(0);
+				}
+			});
+		},
+		link: function(scope, element, attrs) {
+			scope.setTrailer = function(index) {
+				var trailer = scope.movie.trailers.youtube[index];
+				if(null != trailer || null) {
+					console.log("Setting trailer to index " + index);
+					scope.yturl = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + trailer.source + "?enablejsapi=0");
+					scope.trailer = trailer;
+				}
+			}
+		}
+	};
 }])
 .value('apiUrl', 'https://api.themoviedb.org/3')
 .value('apiKey', '013eff1b8075d646416de6ec45620619');

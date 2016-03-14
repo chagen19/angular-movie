@@ -16,7 +16,7 @@
 						<div class="row">
 						<div class="col-xs-12">
 							<span ng:show="movie.backdrop_path != null">
-								<img ng-src="{{url}}w1280{{movie.backdrop_path}}" class="img-responsive" >
+								<img ng-src="{{url}}w1280{{movie.backdrop_path}}" class="img-responsive">
 								<p class="text-left">
 									<a href="" ng-href="{{url}}w1280{{movie.backdrop_path}}">{{url}}w1280{{movie.backdrop_path}}
 									</a>
@@ -35,31 +35,7 @@
 							<p>{{movie.overview}}</p>
 						</div>
 						</div>
-						<div class="row" ng:show="trailer.source != null">
-							<div class="col-xs-8">
-								<h3>Trailers</h3>
-								
-									<div class="dropdown">
-										<button id="dLabel" class="btn btn-default" data-toggle="dropdown">
-											{{trailer.name}} <span class="caret"></span>
-										</button>
-										<span class="label label-default">{{trailer.size}}</span>
-										<ul class="dropdown-menu">
-											<li ng-repeat="t in movie.trailers.youtube | orderBy:'name'">
-												<span class="hand" ng-click="setTrailer($index)">
-													<i class="fa fa-youtube"></i> {{t.name}}
-												</span>
-											</li>
-										</ul>
-									</div>
-								<p ng:show="trailer.source != null">
-									<div class="embed-responsive embed-responsive-16by9">
-										<iframe class="embed-responsive-item" id="player" type="text/html"
-										ng-src="{{yturl}}" frameborder="1" allowfullscreen="1"></iframe>
-									</div>
-								</p>
-							</div>
-						</div>
+						<trailers-section movie="movie"></trailers-section>
 						<div class="row">
 							<div class="col-xs-12">
 								<h3>Cast</h3> 
