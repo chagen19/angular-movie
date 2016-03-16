@@ -52,14 +52,18 @@ angular.module('movieApp.theMovieDB.controllers', [
 	function($rootScope, $scope, $sce, $timeout, theMovieDBService) {
 		theMovieDBService.getMovieDetails().success(function(data) {
 			$scope.movie = data;
+			$scope.trailerCount = data.trailers.youtube.length;
 			$rootScope.movieId = data.id;
+			$scope.reInitIso();
+		});
 
+		$scope.reInitIso = function() {
 			<!-- Fix to delay isotop until images are loaded -->
 			$timeout(function() {
 				console.log('Re-initiating isotope');
 				$scope.$broadcast('iso-init', {name: null, params: null});
 			}, 700);
-		});
+		};
 }])
 .controller('SortController', ['$scope', function($scope) {
 	$scope.sortedAsc = function(column) {
@@ -126,6 +130,18 @@ function link(scope, element, attrs) {
     };
 
 }])
+.directive('posterSection', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'views/components/poster-section.html'
+	}
+})
+.directive('overviewSection', function() {
+	return {
+		restrict: 'E',
+		templateUrl: 'views/components/overview-section.html'
+	}
+})
 .directive('trailersSection', ['$sce', function($sce) {
 
 	return {
@@ -135,8 +151,8 @@ function link(scope, element, attrs) {
 		 },
 		templateUrl: 'views/components/trailers-section.html',
 		controller: function($scope, $element, $attrs) {
-			$scope.$watch(function($scope) { return $scope.movie;}, function(value) {
-				if(value !== undefined) {
+			$scope.$watch($attrs.movie, function(value) {
+				if(value) {
 					$scope.setTrailer(0);
 				}
 			});
@@ -152,6 +168,12 @@ function link(scope, element, attrs) {
 			}
 		}
 	};
+}])
+.directive('castSection', ['$timeout', function($timeout) {
+	return {
+		restrict: 'E',
+		templateUrl: 'views/components/cast-section.html'
+	}
 }])
 .value('apiUrl', 'https://api.themoviedb.org/3')
 .value('apiKey', '013eff1b8075d646416de6ec45620619');

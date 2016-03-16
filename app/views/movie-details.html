@@ -3,68 +3,44 @@
 		<highchart id="chart1" config="chartConfig" class="span10"></highchart>
 	</div> -->
 </div>
+
 <div class="row">
 	<div class="col-xs-12">
-		<h3>{{movie.title}}</h3>
-		<h5>{{movie.tagline}}</h5>
-	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12">
-			<div class="panel panel-default">
-				<div class="panel-body">
-						<div class="row">
-						<div class="col-xs-12">
-							<span ng:show="movie.backdrop_path != null">
-								<img ng-src="{{url}}w1280{{movie.backdrop_path}}" class="img-responsive">
-								<p class="text-left">
-									<a href="" ng-href="{{url}}w1280{{movie.backdrop_path}}">{{url}}w1280{{movie.backdrop_path}}
-									</a>
-								</p>
-							</span>
-							<br>
-							<ul class="list-inline">
-								<li ng-repeat="genre in movie.genres">
-									<span class="label label-primary">
-										{{genre.name}}
-									</span>
-								</li>
-							</ul>
-							<a href="{{movie.homepage}}">{{movie.homepage}}</a>
-							<h3>Overview</h3>
-							<p>{{movie.overview}}</p>
-						</div>
-						</div>
-						<trailers-section movie="movie"></trailers-section>
-						<div class="row">
-							<div class="col-xs-12">
-								<h3>Cast</h3> 
-								<div id="container isotope" isotope-container="isotope-container" class="row">
-									<div class="profile-item isotope-item" isotope-item="isotope-item" ng-repeat="cast in movie.credits.cast | limitTo:18 | orderBy:'order'" class="col-xs-2" ng:show="cast.profile_path != null">
-											<div class="thumbnail">
-												<img ng-src="{{url}}h632{{cast.profile_path}}" alt="{{cast.character}} Poster" class="img-responsive profile">
-												<div class="caption">
-													<h5>{{cast.name}}</h5>
-													<h6>as {{cast.character}}</h6>
-												</div>	
-											</div>
-									</div>
-								</div>
-							</div>
-						</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<poster-section></poster-section>
+
+				<div class="row">
+					<div class="col-xs-12">
+						<h3>{{movie.title}}</h3>
+						<h5>{{movie.tagline}}</h5>
+					</div>
 				</div>
+
+				<uib-tabset active="active">
+    				<uib-tab index="0" heading="Overview">
+						<overview-section></overview-section>
+					</uib-tab>
+    				<uib-tab index="1" heading="Trailers" select="reInitIso()" ng-hide="trailerCount === 0">
+						<trailers-section movie="movie"></trailers-section>
+					</uib-tab>
+					<uib-tab index="2" heading="Cast" select="reInitIso()">
+						<cast-section></cast-section>
+					</uib-tab>
+				</uib-tabset>
 			</div>
+		</div>
 	</div>
 </div>
 
-		<script type="text/javascript">
-		$('#container').imagesLoaded()
-		.always( function( instance ) {
-			$('#container').isotope({
-				itemSelector : '.profile-item',
-				layoutMode : 'fitRows'
-			});
-			$(window).smartresize();
-		});
+<script type="text/javascript">
+$('#container').imagesLoaded()
+.always( function( instance ) {
+	$('#container').isotope({
+		itemSelector : '.profile-item',
+		layoutMode : 'fitRows'
+	});
+	$(window).smartresize();
+});
 
-		</script>
+</script>
