@@ -6,7 +6,7 @@ angular.module('movieApp.favorites', [
 ])
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider.when('/favorites', {
-      templateUrl: 'views/movies.html',
+      templateUrl: 'views/movie-list.html',
       controller: 'FavoritesCtrl'
     });
 }]);
@@ -14,8 +14,7 @@ angular.module('movieApp.favorites', [
 angular.module('movieApp.favorites.controllers', [
 	'movieApp.favorites.services',
 	'movieApp.theMovieDB.services',
-	'ngAnimate',
-  	'iso.directives'
+	'ngAnimate'
 ]).controller('FavoritesCtrl', ['$rootScope', '$scope', '$timeout', 'favoriteService','theMovieDBService',
 	function($rootScope, $scope, $timeout, favoriteService, theMovieDBService) {
 		var results = [];

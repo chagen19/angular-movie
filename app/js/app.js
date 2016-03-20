@@ -1,14 +1,14 @@
 'use strict';
 
-
 // Declare app level module which depends on filters, and services
 angular.module('movieApp', [
   'ngRoute',
   'movieApp.favorites',
-  'movieApp.theMovieDB',
-  'iso.directives',
+  'movieApp.movieSearch',
+  'movieApp.movieDetail',
   'ui.bootstrap',
-  'highcharts-ng'
+  'highcharts-ng',
+  'iso.directives'
 ]).
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.otherwise({

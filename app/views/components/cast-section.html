@@ -1,13 +1,15 @@
 <div class="row">
 	<div class="col-xs-12">
 		<p>
-			<div id="container isotope" isotope-container="isotope-container" class="row">
-				<div class="profile-item isotope-item" isotope-item="isotope-item" ng-repeat="cast in movie.credits.cast | limitTo:18 | orderBy:'order'" class="col-xs-2" ng:show="cast.profile_path != null">
-					<div class="thumbnail">
-						<img ng-src="{{url}}h632{{cast.profile_path}}" alt="{{cast.character}} Poster" class="img-responsive profile">
+			<div id="castContainer" isotope-container z>
+				<div class="profile-item" isotope-item ng-repeat="actor in cast | limitTo:18 | orderBy:'order' track by actor.cast_id" class="col-xs-2" ng:show="actor.profile_path != null">
+					<div class="thumbnail" >
+						<img ng-src="{{url}}h632{{actor.profile_path}}" alt="{{actor.character}} Poster" class="img-responsive profile">
 						<div class="caption">
-							<h5>{{cast.name}}</h5>
-							<h6>as {{cast.character}}</h6>
+							<h5><small>{{actor.name}}</small></h5>
+							<span uib-tooltip="{{actor.character}}" tooltip-placement="top" tooltip-popup-delay="1000">
+								<h6>{{actor.character}}</h6>
+							</span>
 						</div>	
 					</div>
 				</div>

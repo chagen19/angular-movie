@@ -62,6 +62,7 @@ angular.module("iso.controllers", ["iso.config", "iso.services"])
     $scope.init = function(isoInit) {
       optionsStore.storeInit(isoInit);
       isotopeContainer = isoInit.element;
+      console.log("container", isotopeContainer);
       initEventHandler($scope.$on, isoInit.isoOptionsEvent || topics.MSG_OPTIONS, optionsHandler);
       initEventHandler($scope.$on, isoInit.isoMethodEvent || topics.MSG_METHOD, methodHandler);
       $scope.isoMode = isoInit.isoMode || "addItems";
