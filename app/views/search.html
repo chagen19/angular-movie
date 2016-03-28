@@ -2,9 +2,10 @@
 <form class="form-inline" role="form">
 	<div class="input-group col-sm-3">
 		<label for="movieNameTxt" class="sr-only">Movie Name</label>
-		<input ng-model="movieName" class="form-control" placeholder="Enter Movie Name"> 
+		<input id="movieNameTxt" ng-model="movieName" class="form-control" placeholder="Enter Movie Name">
 		<span class="input-group-btn">
 			<a href="#/search/{{movieName}}" class="btn btn-primary" role="button">Search</a>
 		</span>
 	</div>
+	<a href="" ng-href="#/favorites" role="button">Favorites</a>
 </form>

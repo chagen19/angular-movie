@@ -1,16 +1,16 @@
 <div class="row">
 	<div class="col-xs-12">
 		<p>
-			<div id="castContainer" isotope-container z>
-				<div class="profile-item" isotope-item ng-repeat="actor in cast | limitTo:18 | orderBy:'order' track by actor.cast_id" class="col-xs-2" ng:show="actor.profile_path != null">
-					<div class="thumbnail" >
+			<div id="castContainer" isotope-container iso-use-init-event="false">
+				<div class="item isotope-item" isotope-item ng-repeat="actor in cast | limitTo:18 | orderBy:'order' track by actor.cast_id" class="col-xs-2" ng:show="actor.profile_path != null">
+					<div class="thumbnail" current-item='{{$index}}' total-results="{{total}}" >
 						<img ng-src="{{url}}h632{{actor.profile_path}}" alt="{{actor.character}} Poster" class="img-responsive profile">
 						<div class="caption">
 							<h5><small>{{actor.name}}</small></h5>
 							<span uib-tooltip="{{actor.character}}" tooltip-placement="top" tooltip-popup-delay="1000">
 								<h6>{{actor.character}}</h6>
 							</span>
-						</div>	
+						</div>
 					</div>
 				</div>
 			</div>

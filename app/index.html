@@ -1,43 +1,33 @@
 <!doctype html>
 <html lang="en" ng-app="movieApp">
 <head>
-  <meta charset="utf-8">
-  <title>My AngularJS Movies App</title>
-  <link rel="stylesheet" href="css/app.css"/>
+    <meta charset="utf-8">
+    <title>My AngularJS Movies App</title>
+    <link rel="stylesheet" href="css/app.css"/>
     <link rel="stylesheet" href="css/pace_corner.css"/>
 
-  <!-- Bootstrap -->
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
-  <ul class="menu">
+<ul class="menu">
     <li>Debug: <input type="checkbox" ng-model="debug"></li>
     <li>Url:{{url}}</li>
     <li>ProfileId:{{profileId}}</li>
     <li>MovieId:{{movieId}}</li>
-  </ul>
+</ul>
 
-  <div class="container" id="con">
-    <h3>Movie Search</h3>
-<form name="search" class="form-inline" role="form" novalidate>
-  <div class="input-group col-sm-4">
-    <label for="movieNameTxt" class="sr-only">Movie Name</label>
-    <input ng-model="movieName" class="form-control" placeholder="Enter Movie Name" required>
-    <span class="input-group-btn">
-      <a ng-href="#/search/{{movieName}}" class="btn btn-primary" role="button" ng-disabled="search.$invalid">Search</a>
-    </span>
-  </div>
-   <a href="" ng-href="#/favorites" role="button">Favorites</a>
-</form>
-      <div class="row">
+<div class="container" id="con">
+    <movie-search></movie-search>
+    <div class="row">
         <div class="col-xs-12">
-          <p>
-          <div ng-view></div>
-        </p>
+            <p>
+            <div ng-view></div>
+            </p>
         </div>
-      </div>
-  </div>
+    </div>
+</div>
 <!-- In production use:
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 -->
@@ -60,22 +50,23 @@
 <script src="../bower_components/angular-animate/angular-animate.js"></script>
 <script src="../bower_components/angular-route/angular-route.js"></script>
 <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.js"></script>
-<!--<script src="../bower_components/isotope/dist/isotope.pkgd.js"></script>-->
+<script src="../bower_components/isotope/dist/isotope.pkgd.js"></script>
+<script src="../bower_components/isotope-cells-by-column/cells-by-column.js"></script>
+
+
+<!--<script src="../bower_components/isotope/dist/isotope.3.js"></script>-->
 <script src="../bower_components/angular-isotope/dist/angular-isotope.js"></script>
-<script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
-<script src="../bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
-<script src="http://code.highcharts.com/stock/highstock.src.js"></script>
-<script src="http://code.highcharts.com/highcharts-more.js"></script>
-<script src="http://code.highcharts.com/modules/solid-gauge.src.js"></script>
+<!--<script src="../bower_components/highcharts-ng/dist/highcharts-ng.js"></script>-->
+<!--<script src="http://code.highcharts.com/stock/highstock.src.js"></script>-->
+<!--<script src="http://code.highcharts.com/highcharts-more.js"></script>-->
+<!--<script src="http://code.highcharts.com/modules/solid-gauge.src.js"></script>-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <script src="js/app.js"></script>
 <script src="js/modules/movie-list.js"></script>
 <script src="js/modules/movie-detail.js"></script>
 <script src="js/modules/themoviedb.js"></script>
 <script src="js/modules/favorites.js"></script>
-<script src="js/3rdparty/smartresize.js"></script>
-
+<script src="js/modules/search.js"></script>
 
 </body>
 </html>

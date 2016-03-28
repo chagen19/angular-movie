@@ -1,55 +1,62 @@
-'use strict';
+(function () {
+    'use strict';
 
-angular.module('movieApp.theMovieDB', [
-	'ngRoute',
-	'movieApp.theMovieDB.controllers'
-])
-.config(['$routeProvider', function($routeProvider){
+    function theMovieDBProvider() {
+        var apiUrl = '';
+        var apiKey = '';
 
-	$routeProvider.when('/details/:movieId', {
-			templateUrl: 'views/movie-details.html',
-			controller: 'DetailCtrl'
-		});
-}]);
+        return {
+            configure: function (settings) {
+                apiKey = settings.apiKey;
+                apiUrl = settings.apiUrl;
+            },
+            $get: function ($http) {
+                console.log("Getting Provider Object");
+                return {
+                    getMovies: function (searchCriteria) {
+                        var url = apiUrl + "/search/movie?api_key=" + apiKey + "&query=" + searchCriteria;
+                        return $http.get(url);
+                    },
+                    getMovieDetails: function (movieId) {
+                        var url = apiUrl + "/movie/" + movieId + "?api_key=" + apiKey;
+                        console.log(url);
+                        return $http.get(url);
+                    },
+                    getSimilarMovies: function (movieId) {
+                        var url = apiUrl + "/movie/" + movieId + "/similar?api_key=" + apiKey;
+                        return $http.get(url);
+                    },
+                    getCredits: function (movieId) {
+                        var url = apiUrl + "/movie/" + movieId + "/credits?api_key=" + apiKey;
+                        console.log(url);
+                        return $http.get(url);
+                    },
+                    getConfigurationData: function () {
+                        var url = apiUrl + "/configuration?api_key=" + apiKey;
+                        return $http.get(url);
+                    },
+                    getMovieById: function (movieId) {
+                        var url = apiUrl + "/movie/" + movieId + "?api_key=" + apiKey;
+                        return $http.get(url);
+                    },
+                    getVideos: function (movieId) {
+                        var url = apiUrl + "/movie/" + movieId + "/videos?api_key=" + apiKey;
+                        return $http.get(url);
+                    }
+                }
+            }
+        }
+    }
 
-angular.module('movieApp.theMovieDB.controllers', [
-	'movieApp.theMovieDB.services',
-	'movieApp.favorites.services',
-	'movieApp.shared.directives',
-	'ngAnimate'
-]);
-
-angular.module('movieApp.theMovieDB.services', [
-])
-.factory('theMovieDBService', ['$http', '$routeParams', 'apiUrl', 'apiKey', function($http, $routeParams, apiUrl, apiKey) {
-	return {
-		getMovies : function() {
-			var url = apiUrl + "/search/movie?api_key=" + apiKey + "&query=" + $routeParams.movieName;
-			return $http.get(url);
-		},
-		getMovieDetails : function() {
-			var url = apiUrl + "/movie/" + $routeParams.movieId + "?api_key=" + apiKey + "&append_to_response=trailers";
-			console.log(url);
-			return $http.get(url);
-		},
-		getSimilarMovies : function() {
-			var url = apiUrl + "/movie/" + $routeParams.movieId + "/similar?api_key=" + apiKey;
-			return $http.get(url);
-		},
-		getCredits : function() {
-			var url = apiUrl + "/movie/" + $routeParams.movieId + "/credits?api_key=" + apiKey;
-			console.log(url);
-			return $http.get(url);
-		},
-		getConfigurationData : function() {
-			var url = apiUrl + "/configuration?api_key=" + apiKey;
-			return $http.get(url);
-		},
-		getMovieById : function(movieId) {
-			var url = apiUrl + "/movie/" + movieId + "?api_key=" + apiKey;
-			return $http.get(url);
-		},
-	}
-}])
-.value('apiUrl', 'https://api.themoviedb.org/3')
-.value('apiKey', '013eff1b8075d646416de6ec45620619');
+    angular.module('movieApp.theMovieDB.services', [])
+        .config(function (theMovieDBServiceProvider) {
+            console.log("Configuring Provider", theMovieDBServiceProvider);
+            theMovieDBServiceProvider.configure({
+                apiUrl: 'https://api.themoviedb.org/3',
+                apiKey: '013eff1b8075d646416de6ec45620619'
+            });
+        })
+        .provider('theMovieDBService', theMovieDBProvider());
+    // .value('apiUrl', 'https://api.themoviedb.org/3')
+    // .value('apiKey', '013eff1b8075d646416de6ec45620619');
+})();

@@ -1,44 +1,40 @@
-<!-- <div class="row">
-	<div class="col-xs-4">
-		<highchart id="chart1" config="chartConfig" class="span10"></highchart>
-	</div> 
-</div> -->
-
 <div ng:show="debug" class="alert alert-info">
-		<p>
-			<i class="fa fa-info-circle"></i> {{movieurl | json}}  
-		</p>
-	</div>
+    <p>
+        <i class="fa fa-info-circle"></i> {{movieurl | json}}
+    </p>
+</div>
 
 <div class="row">
-	<div class="col-xs-12">
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<poster-section></poster-section>
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <poster-section></poster-section>
 
-				<div class="row">
-					<div class="col-xs-12">
-						<h3>{{movie.title}}</h3>
-						<h5>{{movie.tagline}}</h5>
-					</div>
-				</div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3>{{movie.title}}</h3>
+                        <h5>{{movie.tagline}}</h5>
+                    </div>
+                </div>
 
-				<uib-tabset active="active">
-    				<uib-tab index="0" heading="Overview">
-						<overview-section></overview-section>
-					</uib-tab>
-    				<uib-tab index="1" heading="Trailers" select="reInitIso()" ng-hide="trailerCount === 0">
-						<trailers-section movie="movie"></trailers-section>
-					</uib-tab>
-					<uib-tab index="2" heading="Cast" select="reInitIso()">
-						<cast-section></cast-section>
-					</uib-tab>
-					<!-- <uib-tab index="3" heading="Similar Titles" select="reInitIso()">
-						<similar-section></similar-section>
-					</uib-tab> -->
-					
-				</uib-tabset>
-			</div>
-		</div>
-	</div>
+                <uib-tabset active="active">
+                    <uib-tab index="0" heading="Overview">
+                        <overview-section></overview-section>
+                    </uib-tab>
+                    <uib-tab index="1" heading="Trailers" select="reInitIso()" ng-hide="trailerCount === 0">
+                        <trailers-section movie-id="{{movieId}}"></trailers-section>
+                    </uib-tab>
+                    <uib-tab index="2" heading="Cast" select="reInitIso()">
+                        <cast-section movie-id="{{movieId}}"></cast-section>
+                    </uib-tab>
+                    <uib-tab index="3" heading="Similar Titles" select="reInitIso()">
+                        <p style="margin-top: 20px">
+                            <similar-section movie-id="{{movieId}}" go="go(path)"></similar-section>
+                        </p>
+                    </uib-tab>
+
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
 </div>
