@@ -87,7 +87,8 @@
             restrict: 'E',
             scope: {
                 movieId: '@',
-                goTo: '&go'
+                goTo: '&go',
+                favorites: '='
             },
             templateUrl: 'views/movie-list.html',
             controller: function ($scope, $element, $attrs) {
@@ -99,9 +100,10 @@
                 });
             },
             link: function(scope, element, attrs) {
-                scope.go = function(path) {
-                    scope.goTo({path: path})
-                }
+                scope.go = function(value) {
+                    // Need to pass an object that matches to the parameter name of passed in mathod
+                    scope.goTo({path: value});
+                };
             }
         };
     }
@@ -109,7 +111,7 @@
     angular.module('movieApp.movieDetail', [
         'ngRoute',
         'movieApp.movieDetail.controllers',
-        'movieApp.movieList.directives'
+        'movieApp.common.directives'
     ]);
 
     angular.module('movieApp.movieDetail.controllers', [

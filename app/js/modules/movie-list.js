@@ -10,19 +10,6 @@
                 $scope.results = data.results;
             });
         };
-
-        $scope.addFavorite = function (fav) {
-            fav.source = 'themoviedb';
-            favoriteService.addFavorite(fav, function () {
-                $rootScope.refreshFavorites();
-            });
-        };
-        $scope.removeFavorite = function (movie) {
-            var fav = $rootScope.favorites[movie.id];
-            favoriteService.removeFavorite(fav, function () {
-                $rootScope.refreshFavorites();
-            });
-        };
         $scope.search();
     }
 
@@ -49,24 +36,6 @@
         $scope.setSortOrder('title');
     }
 
-    function itemsLoadedDirective($timeout) {
-        function link(scope, element, attrs) {
-            scope.$watch(attrs.currentItem, function (value) {
-                if (value == attrs.totalResults - 1) {
-                    <!-- Fix to delay isotop until images are loaded -->
-                    $timeout(function () {
-                        console.log('Re-initiating isotope for element', element);
-                        scope.$emit('isotope.onLayout');
-                        //scope.$emit('iso-init', {name: null, params: null});
-                    }, 700);
-                }
-            });
-        }
-
-        return {
-            link: link
-        };
-    }
 
     angular.module('movieApp.movieList', [
         'ngRoute',
@@ -75,12 +44,8 @@
 
     angular.module('movieApp.movieList.controllers', [
             'movieApp.theMovieDB.services',
-            'movieApp.favorites.services',
-            'movieApp.movieList.directives'
+            'movieApp.favorites.services'
         ])
         .controller('ListCtrl', listController)
         .controller('SortController', sortController);
-
-    angular.module('movieApp.movieList.directives', [])
-        .directive('currentItem', itemsLoadedDirective);
 })();

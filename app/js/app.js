@@ -22,23 +22,34 @@
                         $rootScope.debug = debug;
                         $rootScope.tid = 0;
                         $rootScope.profileId = profileId;
-                        $rootScope.favorites = {};
-
-                        refreshFavorites();
 
                         function refreshFavorites() {
                             console.log("Refreshing Favorites");
                             favoriteService.getFavorites().success(function (data) {
-                                $rootScope.favorites = {};
-                                var favs = data.favorites;
-                                for (var i = 0, len = favs.length; i < len; i++) {
-                                    $rootScope.favorites[favs[i].id] = favs[i];
-                                }
+                                storeFavoritesInScope(data.favorites);
                             });
-                        };
-                        $rootScope.refreshFavorites = function () {
+                        }
+
+                        function storeFavoritesInScope(favs) {
+                            $rootScope.favorites = {};
+                            for (var i = 0, len = favs.length; i < len; i++) {
+                                $rootScope.favorites[favs[i].id] = favs[i];
+                            }
+
+                        }
+
+                        $rootScope.storeFavoritesInScope = storeFavoritesInScope;
+
+                        $rootScope.$on('favoriteAdded', function() {
+                            console.log("Root Scopt Received favoriteAdded Event");
                             refreshFavorites();
-                        };
+                        });
+
+                        $rootScope.$on('favoriteRemoved', function() {
+                            console.log("Root Scopt Received favoriteRemoved Event");
+                            refreshFavorites();
+                        });
+
                         $rootScope.go = function (path) {
                             $location.path(path);
                         };
@@ -55,8 +66,9 @@
             'movieApp.movieList',
             'movieApp.movieDetail',
             'movieApp.movieSearch',
+            'movieApp.common',
             'ui.bootstrap',
-            'iso.directives',
+            'iso.directives'
         ])
         .config(function ($routeProvider, initProvider) {
             $routeProvider.when('/details/:movieId', {

@@ -6,8 +6,10 @@
         $scope.results = [];
         console.log("Retrieving Favorites");
         favoriteService.getFavorites().success(function (data) {
-            $scope.total = data.favorites.length;
-            angular.forEach(data.favorites, function (fav, index) {
+            var favs = data.favorites;
+            $rootScope.storeFavoritesInScope(favs);
+            $scope.total = favs.length;
+            angular.forEach(favs, function (fav, index) {
                 theMovieDBService.getMovieById(fav.id).success(function (data) {
                     results.push(data);
                     // Set results after they all have been loaded
@@ -15,25 +17,19 @@
                         $scope.results = results;
                     }
                 });
+            });
 
+            // Remove movie from list and refresh isotope
+            $scope.$on('favoriteRemoved', function (event, fav) {
+                console.log("Received favoriteRemoved Event", fav.id);
+                var removeIndex = results.map(function (item) {
+                    return item.id;
+                }).indexOf(fav.id);
+                removeIndex > -1 && results.splice(removeIndex, 1);
+                $scope.$broadcast('iso-init', {name: null, params: null});
             });
             $scope.page = "Favorites";
         });
-        $scope.removeFavorite = function (fav) {
-            console.log("FAV", fav);
-            var results = $scope.results;
-            favoriteService.removeFavorite($rootScope.favorites[fav.id], function (data) {
-                var removeIndex = results.map(function (item) {
-                        return item.id;
-                    })
-                    .indexOf(fav.id);
-
-                console.log("Index Is: ", removeIndex)
-                removeIndex > -1 && results.splice(removeIndex, 1);
-                $rootScope.refreshFavorites();
-                $scope.$broadcast('iso-init', {name: null, params: null});
-            });
-        };
     }
 
     function favoriteService($rootScope, $http) {
@@ -55,9 +51,9 @@
     }
 
     angular.module('movieApp.favorites', [
-            'ngRoute',
-            'movieApp.favorites.controllers'
-        ]);
+        'ngRoute',
+        'movieApp.favorites.controllers'
+    ]);
 
     angular.module('movieApp.favorites.controllers', [
         'movieApp.favorites.services',

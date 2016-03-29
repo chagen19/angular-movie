@@ -32,16 +32,7 @@
 					</span>
 					<h6 class="vote_average">Rating: {{result.vote_average|| '0'}} / 10</h6>
 					<h6 class="release_date">Released: {{result.release_date}}</h6>
-					<div class="text-center">
-						<button ng-click="addFavorite(result);" class="btn btn-default btn-block" ng:hide="favorites[result.id]">
-							<span class="glyphicon glyphicon-star-empty"></span> 
-							Add
-						</button>
-						<button ng-click="removeFavorite(result);" class="btn btn-default btn-block" ng:show="favorites[result.id]">
-							<span class="glyphicon glyphicon-star"></span> 
-							Remove
-						</button>
-					</div>
+					<favorite-button favorites="favorites" result="result"></favorite-button>
 				</div>	
 			</div>
 		</p>
