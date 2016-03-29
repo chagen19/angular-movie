@@ -5,7 +5,7 @@
 
         return {
             restrict: 'E',
-            templateUrl: 'views/search.html'
+            templateUrl: 'views/movie-search.html'
         }
     }
 
