@@ -10,7 +10,7 @@
                 apiKey = settings.apiKey;
                 apiUrl = settings.apiUrl;
             },
-            $get: function ($http) {
+            $get: ['$http', function ($http) {
                 console.log("Getting Provider Object");
                 return {
                     getMovies: function (searchCriteria) {
@@ -44,7 +44,7 @@
                         return $http.get(url);
                     }
                 }
-            }
+            }]
         }
     }
 
@@ -56,7 +56,7 @@
                 apiKey: '013eff1b8075d646416de6ec45620619'
             });
         })
-        .provider('theMovieDBService', theMovieDBProvider());
+        .provider('theMovieDBService', theMovieDBProvider);
     // .value('apiUrl', 'https://api.themoviedb.org/3')
     // .value('apiKey', '013eff1b8075d646416de6ec45620619');
 })();

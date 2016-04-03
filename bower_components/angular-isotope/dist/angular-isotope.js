@@ -37,7 +37,6 @@
                 isoMode = "";
                 $scope.$on(onLayoutEvent, function (event) {
 
-                    console.log("RELAYOUT", isotopeContainer[0].id );
 
                     isotopeContainer.isotope({layoutMode: 'fitRows', itemSelector: '#' + isotopeContainer[0].id + " .item"});
 
@@ -71,7 +70,6 @@
                 $scope.init = function (isoInit) {
                     optionsStore.storeInit(isoInit);
                     isotopeContainer = isoInit.element;
-                    console.log("Initting ISOTOPE Container", isotopeContainer);
                     initEventHandler($scope.$on, isoInit.isoOptionsEvent || topics.MSG_OPTIONS, optionsHandler);
                     initEventHandler($scope.$on, isoInit.isoMethodEvent || topics.MSG_METHOD, methodHandler);
                     $scope.isoMode = isoInit.isoMode || "addItems";
@@ -388,9 +386,9 @@
                         var selItem;
                         event.preventDefault();
                         selItem = $(event.target);
-                        if (selItem.hasClass(activeClass)) {
-                            return false;
-                        }
+                        // if (selItem.hasClass(activeClass)) {
+                        //     return false;
+                        // }
                         optionSet.find(activeSelector).removeClass(activeClass);
                         selItem.addClass(activeClass);
                         emitOption(createOptions(selItem));

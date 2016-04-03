@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>My AngularJS Movies App</title>
-    <link rel="stylesheet" href="css/app.css"/>
-    <link rel="stylesheet" href="css/pace_corner.css"/>
+    <link rel="stylesheet" href="assets/css/app.css"/>
+    <link rel="stylesheet" href="assets/css/pace_corner.css"/>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
@@ -38,7 +38,7 @@
         }
     };
 </script>
-<script src="js/3rdparty/pace.min.js"></script>
+<script src="assets/js/3rdparty/pace.min.js"></script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../bower_components/jquery/dist/jquery.js"></script>
@@ -61,13 +61,22 @@
 <!--<script src="http://code.highcharts.com/highcharts-more.js"></script>-->
 <!--<script src="http://code.highcharts.com/modules/solid-gauge.src.js"></script>-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<script src="js/app.js"></script>
-<script src="js/modules/movie-list.js"></script>
-<script src="js/modules/movie-detail.js"></script>
-<script src="js/modules/themoviedb.js"></script>
-<script src="js/modules/favorites.js"></script>
-<script src="js/modules/movie-search.js"></script>
-<script src="js/modules/common.js"></script>
+<script src="components/app.js"></script>
+<script src="components/list/movie-list.controller.js"></script>
+<script src="components/list/card/movie-card.js"></script>
+<script src="components/list/sort/movie-sort.js"></script>
+<script src="components/detail/movie-detail.controller.js"></script>
+<script src="components/detail/poster/poster-section.js"></script>
+<script src="components/detail/overview/overview-section.js"></script>
+<script src="components/detail/trailers/trailers-section.js"></script>
+<script src="components/detail/cast/cast-section.js"></script>
+<script src="components/detail/similar/similar-section.js"></script>
+<script src="shared/themoviedb/themoviedb.js"></script>
+<script src="components/favorites/favorites.controller.js"></script>
+<script src="components/favorites/favorites.service.js"></script>
+<script src="components/favorites/button/favorites-button.js"></script>
+<script src="components/search/movie-search.js"></script>
+<script src="shared/common/common.js"></script>
 
 </body>
 </html>

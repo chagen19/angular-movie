@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function favoritesCtrl($rootScope, $scope, $timeout, favoriteService, theMovieDBService) {
+    function favoritesCtrl($rootScope, $scope, favoriteService, theMovieDBService) {
         var results = [];
         $scope.results = [];
         console.log("Retrieving Favorites");
@@ -31,36 +31,8 @@
             $scope.page = "Favorites";
         });
     }
-
-    function favoriteService($rootScope, $http) {
-
-        var factory = {};
-        factory.getFavorites = function () {
-            return $http.get("http://localhost:3000/profile/" + $rootScope.profileId);
-        };
-
-        factory.removeFavorite = function (fav, cb) {
-            console.log("Removing favorite from profile ", fav);
-            $http.delete("http://localhost:3000/profile/54166d47c0edc80000a81de4/favorite/" + fav._id).success(cb);
-        };
-        factory.addFavorite = function (fav, cb) {
-            //fav.source = 'themoviedb';
-            $http.put("http://localhost:3000/profile/54166d47c0edc80000a81de4", fav).success(cb);
-        };
-        return factory;
-    }
-
     angular.module('movieApp.favorites', [
-        'ngRoute',
-        'movieApp.favorites.controllers'
-    ]);
-
-    angular.module('movieApp.favorites.controllers', [
-        'movieApp.favorites.services',
-        'movieApp.theMovieDB.services',
-        'ngAnimate'
-    ]).controller('FavoritesCtrl', favoritesCtrl);
-
-    angular.module('movieApp.favorites.services', [])
-        .factory('favoriteService', favoriteService);
+            'movieApp.theMovieDB.services'
+        ])
+        .controller('FavoritesCtrl', ['$rootScope', '$scope', 'favoriteService', 'theMovieDBService', favoritesCtrl]);
 })();

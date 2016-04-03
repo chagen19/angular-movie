@@ -10,7 +10,7 @@
                 profileId = settings.profileId;
                 debug = settings.debug;
             },
-            $get: function ($rootScope, $location, theMovieDBService, favoriteService) {
+            $get: ['$rootScope', '$location', 'theMovieDBService', 'favoriteService', function ($rootScope, $location, theMovieDBService, favoriteService) {
 
                 return {
                     initialize: function () {
@@ -40,12 +40,12 @@
 
                         $rootScope.storeFavoritesInScope = storeFavoritesInScope;
 
-                        $rootScope.$on('favoriteAdded', function() {
+                        $rootScope.$on('favoriteAdded', function () {
                             console.log("Root Scopt Received favoriteAdded Event");
                             refreshFavorites();
                         });
 
-                        $rootScope.$on('favoriteRemoved', function() {
+                        $rootScope.$on('favoriteRemoved', function () {
                             console.log("Root Scopt Received favoriteRemoved Event");
                             refreshFavorites();
                         });
@@ -55,7 +55,7 @@
                         };
                     }
                 };
-            }
+            }]
         };
     }
 
@@ -70,24 +70,22 @@
             'ui.bootstrap',
             'iso.directives'
         ])
-        .config(function ($routeProvider, initProvider) {
+        .config(['$routeProvider', 'initProvider', function ($routeProvider, initProvider) {
             $routeProvider.when('/details/:movieId', {
-                templateUrl: 'views/movie-detail.html',
+                templateUrl: 'components/detail/movie-detail.html',
                 controller: 'DetailCtrl'
             }).when('/search/:movieName', {
-                templateUrl: 'views/movie-list.html',
+                templateUrl: 'components/list/movie-list.html',
                 controller: 'ListCtrl'
             }).when('/favorites', {
-                templateUrl: 'views/movie-list.html',
+                templateUrl: 'components/list/movie-list.html',
                 controller: 'FavoritesCtrl'
             }).otherwise({
                 redirectTo: '/'
             });
-
             initProvider.configure({profileId: 1, debug: false});
-
-        })
-        .provider('init', initProvider())
+        }])
+        .provider('init', initProvider)
         .run(function (init) {
             init.initialize();
         });

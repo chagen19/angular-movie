@@ -13,6 +13,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <h3>{{movie.title}}</h3>
+                        <uib-rating ng-model="movie.vote_average" max="10" read-only="true"></uib-rating> ({{movie.vote_average}})
                         <h5>{{movie.tagline}}</h5>
                     </div>
                 </div>
