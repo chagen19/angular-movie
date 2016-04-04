@@ -14,7 +14,12 @@
                     <div class="col-xs-12">
                         <h3>{{movie.title}}</h3>
                         <uib-rating ng-model="movie.vote_average" max="10" read-only="true"></uib-rating> ({{movie.vote_average}})
-                        <h5>{{movie.tagline}}</h5>
+                        <blockquote>
+                            <p class="lead">"{{movie.tagline}}"</p>
+                            <footer>Offical Website: <cite title="Source Title"><a href="{{movie.homepage}}" target="_blank">{{movie.homepage}}</a></cite></footer>
+                        </blockquote>
+                        <div></div>
+
                     </div>
                 </div>
 
