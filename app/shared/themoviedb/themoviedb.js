@@ -15,6 +15,7 @@
                 return {
                     getMovies: function (searchCriteria) {
                         var url = apiUrl + "/search/movie?api_key=" + apiKey + "&query=" + searchCriteria;
+                        console.log(url);
                         return $http.get(url);
                     },
                     getMovieDetails: function (movieId) {
@@ -24,6 +25,7 @@
                     },
                     getSimilarMovies: function (movieId) {
                         var url = apiUrl + "/movie/" + movieId + "/similar?api_key=" + apiKey;
+                        console.log(url);
                         return $http.get(url);
                     },
                     getCredits: function (movieId) {
@@ -33,14 +35,27 @@
                     },
                     getConfigurationData: function () {
                         var url = apiUrl + "/configuration?api_key=" + apiKey;
+                        console.log(url);
                         return $http.get(url);
                     },
                     getMovieById: function (movieId) {
                         var url = apiUrl + "/movie/" + movieId + "?api_key=" + apiKey;
+                        //console.log(url);
                         return $http.get(url);
                     },
                     getVideos: function (movieId) {
                         var url = apiUrl + "/movie/" + movieId + "/videos?api_key=" + apiKey;
+                        console.log(url);
+                        return $http.get(url);
+                    },
+                    getNowPlaying: function () {
+                        var url = apiUrl + "/movie/now_playing?api_key=" + apiKey;
+                        console.log(url);
+                        return $http.get(url);
+                    },
+                    getImages: function (movieId) {
+                        var url = apiUrl + "/movie/" + movieId + "/images?api_key=" + apiKey;
+                        console.log(url);
                         return $http.get(url);
                     }
                 }

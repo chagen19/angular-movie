@@ -23,6 +23,11 @@
                         $rootScope.tid = 0;
                         $rootScope.profileId = profileId;
 
+                        $rootScope.activeTabIndex = 0;
+                        $rootScope.searchTabIndex = 0;
+                        $rootScope.favoritesTabIndex = 1;
+                        $rootScope.nowPlayingTabIndex = 2;
+
                         function refreshFavorites() {
                             console.log("Refreshing Favorites");
                             favoriteService.getFavorites().success(function (data) {
@@ -53,6 +58,7 @@
                         $rootScope.go = function (path) {
                             $location.path(path);
                         };
+                        refreshFavorites();
                     }
                 };
             }]
@@ -62,10 +68,12 @@
 // Declare app level module which depends on filters, and services
     angular.module('movieApp', [
             'ngRoute',
+            'ngAnimate',
             'movieApp.favorites',
             'movieApp.movieList',
             'movieApp.movieDetail',
             'movieApp.movieSearch',
+            'movieApp.nowPlaying',
             'movieApp.common',
             'ui.bootstrap',
             'iso.directives'
@@ -80,8 +88,12 @@
             }).when('/favorites', {
                 templateUrl: 'components/list/movie-list.html',
                 controller: 'FavoritesCtrl'
+            }).when('/now-playing', {
+                templateUrl: 'components/list/movie-list.html',
+                controller: 'NowPlayingCtrl'
             }).otherwise({
-                redirectTo: '/'
+                templateUrl: 'components/search/movie-search.html',
+                controller: 'SearchCtrl'
             });
             initProvider.configure({profileId: 1, debug: false});
         }])

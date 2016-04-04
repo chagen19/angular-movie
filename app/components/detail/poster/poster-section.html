@@ -1,9 +1,24 @@
-<div class="row">
-	<div class="col-xs-12">
-		<span ng:show="movie.backdrop_path != null">
-			<a href="" ng-href="{{url}}w1280{{movie.backdrop_path}}">
-				<img ng-src="{{url}}w1280{{movie.backdrop_path}}" class="img-responsive">
-			</a>
-		</span>
-	</div>
-</div>
+<!--<div class="row">-->
+<!--<div class="col-xs-12">-->
+<!--<span ng:show="movie.backdrop_path != null">-->
+<!--<a href="" ng-href="{{url}}w1280{{movie.backdrop_path}}">-->
+<!--<img ng-src="{{url}}w1280{{movie.backdrop_path}}" class="img-responsive">-->
+<!--</a>-->
+
+<!--</span>-->
+<!--</div>-->
+<uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+    <uib-slide ng-repeat="slide in backdrops | limitTo: maxSlides | orderBy:'-vote_average' track by slide.id"
+               index="$index">
+        <img ng-src="{{url}}w1280{{slide.file_path}}" style="margin:auto;">
+        <div class="carousel-caption">
+            <h5>
+                <a ng-href="{{url}}w1280{{slide.file_path}}" target="_blank">
+                    View Backdrop
+                </a>
+            </h5>
+        </div>
+    </uib-slide>
+</uib-carousel>
+<!--</div>-->
+<!--</div>-->

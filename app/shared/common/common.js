@@ -8,7 +8,7 @@
                     <!-- Fix to delay isotop until images are loaded -->
                     $timeout(function () {
                         scope.$emit('isotope.onLayout');
-                    }, 700);
+                    }, 300);
                 }
             });
         }

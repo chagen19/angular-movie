@@ -9,7 +9,7 @@
                 movieId: '@'
             },
             templateUrl: 'components/detail/cast/cast-section.html',
-            controller: function ($scope, $element, $attrs) {
+            controller: function ($scope) {
                 console.log("MovieId IS" + $scope.movieId);
                 $scope.url = $rootScope.url;
                 theMovieDBService.getCredits($scope.movieId).success(function (data) {
@@ -22,5 +22,5 @@
     }
 
     angular.module('movieApp.movieDetail')
-        .directive('castSection', castSection);
+        .directive('castSection', ['$rootScope','theMovieDBService',castSection]);
 })();

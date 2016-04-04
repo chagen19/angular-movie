@@ -2,6 +2,7 @@
     'use strict';
 
     function favoritesCtrl($rootScope, $scope, favoriteService, theMovieDBService) {
+        $rootScope.activeTabIndex = $rootScope.favoritesTabIndex;
         var results = [];
         $scope.results = [];
         console.log("Retrieving Favorites");

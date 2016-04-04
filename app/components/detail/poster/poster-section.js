@@ -2,13 +2,34 @@
  * Created by chagen on 4/3/16.
  */
 (function () {
-    function posterSection() {
+    var curIndex = 0;
+
+    function posterSection($rootScope, theMovieDBService) {
         return {
             restrict: 'E',
-            templateUrl: 'components/detail/poster/poster-section.html'
+            scope: {
+                movieId: '@'
+            },
+            templateUrl: 'components/detail/poster/poster-section.html',
+            controller: function($scope) {
+                $scope.url = $rootScope.url;
+                $scope.myInterval = 4000;
+                $scope.noWrapSlides = false;
+                $scope.maxSlides = 20;
+                $scope.active = 0;
+
+                theMovieDBService.getImages($scope.movieId).success(function (data) {
+                   var backdrops = data.backdrops;
+                    backdrops.map(function (backdrop) {
+                        backdrop.id = curIndex++;
+                        return backdrop;
+                    });
+                    $scope.backdrops = backdrops;
+                });
+            }
         }
     }
 
     angular.module('movieApp.movieDetail')
-        .directive('posterSection', posterSection);
+        .directive('posterSection',['$rootScope','theMovieDBService', posterSection]);
 })();

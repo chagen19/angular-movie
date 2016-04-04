@@ -18,8 +18,20 @@
     <li>MovieId:{{movieId}}</li>
 </ul>
 
+
 <div class="container" id="con">
-    <movie-search></movie-search>
+    <div class="page-header">
+        <h1>Chad's AngularJS Movie App</h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <uib-tabset active="activeTabIndex">
+                <uib-tab heading="Search" select="go('/')" index="searchTabIndex"></uib-tab>
+                <uib-tab heading="Favorites" select="go('/favorites')" index="favoritesTabIndex"></uib-tab>
+                <uib-tab heading="Now Playing" select="go('/now-playing')" index="nowPlayingTabIndex"></uib-tab>
+            </uib-tabset>
+        </div>
+    </div>
     <div class="row">
         <div class="col-xs-12">
             <p>
@@ -42,7 +54,7 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../bower_components/jquery/dist/jquery.js"></script>
-<!-- Latest compiled and minified JavaScript -->
+<!-- Latest compiled and minified Ja100%vaScript -->
 <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
 <!-- Angular -->
@@ -75,7 +87,8 @@
 <script src="components/favorites/favorites.controller.js"></script>
 <script src="components/favorites/favorites.service.js"></script>
 <script src="components/favorites/button/favorites-button.js"></script>
-<script src="components/search/movie-search.js"></script>
+<script src="components/search/movie-search.controller.js"></script>
+<script src="components/now_playing/now-playing.controller.js"></script>
 <script src="shared/common/common.js"></script>
 
 </body>

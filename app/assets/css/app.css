@@ -45,7 +45,7 @@ div[class*='col-'] img.profile {
   text-overflow: ellipsis;
 }
 /*ISOTOPE*/
-.item { width: 20%; 
+.isotope-item { width: 20%;
   padding: 2%;
   min-width:150px ;
 }
@@ -57,8 +57,8 @@ div[class*='col-'] img.profile {
   .profile-item {
    width: 30%;
    }
-   .item { 
-    width: 30%; 
+   .isotope-item {
+    width: 30%;
     }
 }
   @media  (max-width: 991px) and (min-width: 768px)   { /*small screen*/
@@ -66,17 +66,17 @@ div[class*='col-'] img.profile {
    .profile-item {
       width: 20%;
     }
-    .item { 
-    width: 25%; 
+    .isotope-item {
+    width: 25%;
     }
   }
 
   @media(min-width: 992px) { /*med/lg screen*/
  .profile-item {
    width: 15%;
-   
+
   }
-  .item { 
+  .isotope-item {
     width: 20%; 
   }
  } 
@@ -117,4 +117,3 @@ div[class*='col-'] img.profile {
        -o-transition-property:      -o-transform, opacity;
           transition-property:         transform, opacity;
 }
- 

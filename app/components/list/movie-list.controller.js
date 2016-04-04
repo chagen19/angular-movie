@@ -10,8 +10,6 @@
                 $scope.results = data.results;
             });
         };
-
-        $scope.page = 'movie-list';
         $scope.search();
     }
 

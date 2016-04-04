@@ -38,7 +38,7 @@
                 $scope.$on(onLayoutEvent, function (event) {
 
 
-                    isotopeContainer.isotope({layoutMode: 'fitRows', itemSelector: '#' + isotopeContainer[0].id + " .item"});
+                    isotopeContainer.isotope({layoutMode: 'fitRows', itemSelector: '#' + isotopeContainer[0].id + " .isotope-item"});
 
                 });
                 $scope.layoutEventEmit = function ($elems, instance) {
@@ -76,7 +76,7 @@
 
                     return $timeout(function () {
                         var opts = optionsStore.retrieve();
-                        opts.itemSelector = '#' + isotopeContainer[0].id + ' .item';
+                        opts.itemSelector = '#' + isotopeContainer[0].id + ' .isotope-item';
                         isotopeContainer.isotope(opts);
                         postInitialized = true;
                     });

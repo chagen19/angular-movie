@@ -12,6 +12,7 @@
             templateUrl: 'components/favorites/button/favorite-button.html',
             link: function (scope) {
                 scope.addFavorite = function (fav) {
+                    console.log("FAV", scope.favorites)
                     fav.source = 'themoviedb';
                     console.log("Adding Favorite");
                     favoriteService.addFavorite(fav, function (data) {
