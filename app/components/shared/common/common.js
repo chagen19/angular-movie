@@ -8,7 +8,7 @@
                     <!-- Fix to delay isotop until images are loaded -->
                     $timeout(function () {
                         scope.$emit('isotope.onLayout');
-                    }, 300);
+                    }, 400);
                 }
             });
         }
@@ -19,5 +19,5 @@
     }
 
     angular.module('movieApp.common', [])
-        .directive('currentItem', ['$timeout', itemsLoadedDirective]);
+        .directive('currentItem', itemsLoadedDirective);
 })();

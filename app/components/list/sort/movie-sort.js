@@ -28,8 +28,8 @@
             restrict: 'E',
             scope: {},
             templateUrl: 'components/list/sort/movie-sort.html',
-            controller:  ['$scope', sortController]
-        }
+            controller:  sortController
+        };
     }
 
     angular.module('movieApp.movieList')

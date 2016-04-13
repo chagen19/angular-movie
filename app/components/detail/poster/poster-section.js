@@ -18,7 +18,7 @@
                 $scope.maxSlides = 20;
                 $scope.active = 0;
 
-                theMovieDBService.getImages($scope.movieId).success(function (data) {
+                theMovieDBService.getImages($scope.movieId).then(function (data) {
                    var backdrops = data.backdrops;
                     backdrops.map(function (backdrop) {
                         backdrop.id = curIndex++;
@@ -27,9 +27,9 @@
                     $scope.backdrops = backdrops;
                 });
             }
-        }
+        };
     }
 
     angular.module('movieApp.movieDetail')
-        .directive('posterSection',['$rootScope','theMovieDBService', posterSection]);
+        .directive('posterSection',posterSection);
 })();

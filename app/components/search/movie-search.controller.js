@@ -3,9 +3,8 @@
 
     function searchController($rootScope) {
         $rootScope.activeTabIndex = $rootScope.searchTabIndex;
-
     }
 
     angular.module('movieApp.movieSearch', [])
-        .controller('SearchCtrl', ['$rootScope', searchController]);
+        .controller('SearchCtrl', searchController);
 })();

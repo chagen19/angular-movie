@@ -1,12 +1,12 @@
 <movie-sort></movie-sort>
 <div id="movieContainer" isotope-container iso-use-init-event="false">
 	<div class="grid-sizer"></div>
-	<div class="isotope-item" isotope-item ng-repeat="result in results track by result.id" ng:show="result.poster_path != null">
-		<p current-item='{{$index}}' total-results="{{total}}">
-			<movie-card movie="result" go="go(path)" favorites="favorites" url="{{url}}"></movie-card>
+	<div class="isotope-item" isotope-item ng-repeat="movie in movieList.results track by movie.id" ng:show="movie.poster_path != null">
+		<p current-item='{{$index}}' total-results="{{movieList.total}}">
+			<movie-card movie="movie" go="go(path)" favorites="favorites" url="{{url}}"></movie-card>
 		</p>
 	</div>
-	<div id="noResults" ng:show="null == results">
+	<div id="noResults" ng:show="null == movieList">
 		No Results Found
 	</div>
 </div>

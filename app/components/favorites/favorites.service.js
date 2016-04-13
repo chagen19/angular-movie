@@ -23,5 +23,5 @@
     }
 
     angular.module('movieApp.favorites')
-        .factory('favoriteService', ['$rootScope', '$http', favoriteService]);
+        .factory('favoriteService', favoriteService);
 })();

@@ -10,25 +10,30 @@
                 goTo: '&go',
                 favorites: '='
             },
+            bindToController: true,
             templateUrl: 'components/list/movie-list.html',
             controller: function ($scope) {
+                var vm = this;
                 $scope.url = $rootScope.url;
-                theMovieDBService.getSimilarMovies($scope.movieId).success(function (data) {
-                    $scope.total = data.results.length;
-                    $scope.total_results = data.total_results;
-                    $scope.results = data.results;
+                console.log("URL", vm.url);
+                theMovieDBService.getSimilarMovies(vm.movieId).then(function (data) {
+                    vm.results = data.results;
+                    vm.total = data.results.length;
+                    vm.total_results = data.total_results;
                 });
             },
-            link: function(scope) {
-                scope.go = function(value) {
+            controllerAs: 'movieList',
+            link: function() {
+                var vm = this;
+                vm.go = function(value) {
                     // Need to pass an object that matches to the parameter name of passed in method
-                    scope.goTo({path: value});
+                    vm.goTo({path: value});
                 };
             }
         };
     }
 
     angular.module('movieApp.movieDetail')
-        .directive('similarSection', ['$rootScope','theMovieDBService', similarSection]);
+        .directive('similarSection', similarSection);
 
 })();

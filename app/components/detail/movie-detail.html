@@ -12,11 +12,11 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <h3>{{movie.title}}</h3>
-                        <uib-rating ng-model="movie.vote_average" max="10" read-only="true"></uib-rating> ({{movie.vote_average}})
+                        <h3>{{movie.data.title}}</h3>
+                        <uib-rating ng-model="movie.data.vote_average" max="10" read-only="true"></uib-rating> ({{movie.data.vote_average}})
                         <blockquote>
-                            <p class="lead" ng-show="movie.tagline">"{{movie.tagline}}"</p>
-                            <footer ng-show="movie.homepage">Offical Website: <cite title="Source Title"><a href="{{movie.homepage}}" target="_blank">{{movie.homepage}}</a></cite></footer>
+                            <p class="lead" ng-show="movie.data.tagline">"{{movie.data.tagline}}"</p>
+                            <footer ng-show="movie.data.homepage">Official Website: <cite title="Source Title"><a href="{{movie.data.homepage}}" target="_blank">{{movie.data.homepage}}</a></cite></footer>
                         </blockquote>
                         <div></div>
 
@@ -27,13 +27,13 @@
                     <uib-tab index="0" heading="Overview">
                         <overview-section></overview-section>
                     </uib-tab>
-                    <uib-tab index="1" heading="Trailers" select="reInitIso()" ng-hide="trailerCount === 0">
+                    <uib-tab index="1" heading="Trailers" select="movie.reInitIso()">
                         <trailers-section movie-id="{{movieId}}"></trailers-section>
                     </uib-tab>
-                    <uib-tab index="2" heading="Cast" select="reInitIso()">
+                    <uib-tab index="2" heading="Cast" select="movie.reInitIso()">
                         <cast-section movie-id="{{movieId}}"></cast-section>
                     </uib-tab>
-                    <uib-tab index="3" heading="Similar Titles" select="reInitIso()">
+                    <uib-tab index="3" heading="Similar Titles" select="movie.reInitIso()">
                         <p style="margin-top: 20px">
                             <similar-section movie-id="{{movieId}}" go="go(path)" favorites="favorites"></similar-section>
                         </p>

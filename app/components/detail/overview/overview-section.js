@@ -6,7 +6,7 @@
         return {
             restrict: 'E',
             templateUrl: 'components/detail/overview/overview-section.html'
-        }
+        };
     }
 
     angular.module('movieApp.movieDetail')

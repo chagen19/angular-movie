@@ -19,7 +19,7 @@
                     scope.goTo({path: value});
                 };
             }
-        }
+        };
     }
 
     angular.module('movieApp.movieList')
