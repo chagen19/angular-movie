@@ -8,7 +8,7 @@
     <div class="col-xs-12">
         <div class="panel panel-default">
             <div class="panel-body">
-                <poster-section movie-id="{{movieId}}"></poster-section>
+                <poster-section movie-id="{{movie.movieId}}"></poster-section>
 
                 <div class="row">
                     <div class="col-xs-12">
@@ -28,14 +28,14 @@
                         <overview-section></overview-section>
                     </uib-tab>
                     <uib-tab index="1" heading="Trailers" select="movie.reInitIso()">
-                        <trailers-section movie-id="{{movieId}}"></trailers-section>
+                        <trailers-section movie-id="{{movie.movieId}}"></trailers-section>
                     </uib-tab>
                     <uib-tab index="2" heading="Cast" select="movie.reInitIso()">
-                        <cast-section movie-id="{{movieId}}"></cast-section>
+                        <cast-section movie-id="{{movie.movieId}}"></cast-section>
                     </uib-tab>
                     <uib-tab index="3" heading="Similar Titles" select="movie.reInitIso()">
                         <p style="margin-top: 20px">
-                            <similar-section movie-id="{{movieId}}" go="go(path)" favorites="favorites"></similar-section>
+                            <similar-section movie-id="{{movie.movieId}}" go="go(path)" favorites="favorites"></similar-section>
                         </p>
                     </uib-tab>
 

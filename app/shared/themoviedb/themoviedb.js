@@ -47,7 +47,7 @@
         };
     }
 
-    angular.module('movieApp.theMovieDB.services', [])
+    angular.module('movieApp.theMovieDB.services', ['restangular'])
         .factory('theMovieDBService', theMovieDBFactory);
     // .value('apiUrl', 'https://api.themoviedb.org/3')
     // .value('apiKey', '013eff1b8075d646416de6ec45620619');

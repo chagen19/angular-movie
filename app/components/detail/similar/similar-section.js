@@ -15,7 +15,7 @@
             controller: function ($scope) {
                 var vm = this;
                 $scope.url = $rootScope.url;
-                console.log("URL", vm.url);
+                console.log("URL ASDF", vm.url);
                 theMovieDBService.getSimilarMovies(vm.movieId).then(function (data) {
                     vm.results = data.results;
                     vm.total = data.results.length;

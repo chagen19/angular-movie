@@ -7,7 +7,9 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
-    ngAnnotate = require('gulp-ng-annotate');;
+    ngAnnotate = require('gulp-ng-annotate'),
+    wiredep = require('wiredep').stream;
+
 
 // define the default task and add the watch task to it
 gulp.task('default', ['watch']);
@@ -24,8 +26,20 @@ gulp.task('watch', function() {
     gulp.watch('app/**/*.js', ['jshint']);
 });
 
+
+<!-- Inject bower dependencies into index.html -->
+gulp.task('bower', function () {
+    gulp.src('assets/index.html')
+        .pipe(wiredep({
+            optional: 'configuration',
+            goes: 'here'
+        }))
+        .pipe(gulp.dest('app/'));
+});
+
+
 gulp.task('build-js', function() {
-    return gulp.src('app/**/*.js')
+    return gulp.src('**')
         .pipe(sourcemaps.init())
         .pipe(concat('bundle.js'))
         .pipe(ngAnnotate())
