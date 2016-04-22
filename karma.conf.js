@@ -5,17 +5,17 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: './',
+    basePath: '',
 
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
 
-
     // list of files / patterns to load in the browser
     // The order here matters!!!!!!
     files: [
+      'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/underscore/underscore.js',
@@ -24,19 +24,25 @@ module.exports = function(config) {
       'app/app.*.js',
       'app/**/*.controller.js',
       'app/**/*.js',
+      'app/**/*.html'
     ],
-
-
-    // list of files to exclude
-    exclude: [
-    ],
-
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'app/**/*!(spec).js': ['coverage'],
+      'app/**/*.html': ['ng-html2js']
     },
 
+    // A way to pre-load the templates into the $templateCache so that they're already available when Angular asks for them, without using $http.
+    ngHtml2JsPreprocessor: {
+      stripPrefix: "app/",
+      moduleName: "templates"
+    },
+
+    // list of files to exclude
+    exclude: [
+    ],
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -44,6 +50,10 @@ module.exports = function(config) {
     reporters: ['progress', 'kjhtml'],
 
 
+    junitReporter: {
+      // location of results output file
+      outputFile: 'test-results/junit-results.xml'
+    },
     // web server port
     port: 9876,
 
@@ -63,7 +73,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
@@ -73,5 +83,5 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-  })
+  });
 }

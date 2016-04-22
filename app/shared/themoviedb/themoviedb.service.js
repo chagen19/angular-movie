@@ -39,6 +39,7 @@
                 return getContent(movieId, 'videos');
             },
             getCredits: function (movieId) {
+                console.log("NOOOOOOOOOOOOOOOOOOOOOOOOOOO");
                 return getContent(movieId, 'credits');
             },
             getSimilarMovies: function (movieId) {

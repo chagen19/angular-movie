@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function detailCtrl($scope, $timeout, $stateParams, theMovieDBService) {
+    var detailCtrl = function($scope, $timeout, $stateParams, theMovieDBService) {
         var vm = this;
         // So movie id is available immediately to gather the additional data
         var movieId = $stateParams.movieId;
@@ -9,6 +9,7 @@
         theMovieDBService.getMovieById(movieId).then(function (data) {
             vm.data = data;
         });
+
 
         vm.reInitIso = function () {
             // Fix to delay isotop until images are loaded

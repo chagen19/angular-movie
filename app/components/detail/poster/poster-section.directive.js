@@ -2,6 +2,7 @@
  * Created by chagen on 4/3/16.
  */
 (function () {
+    'use strict';
     var curIndex = 0;
 
     function posterSection($rootScope, theMovieDBService) {

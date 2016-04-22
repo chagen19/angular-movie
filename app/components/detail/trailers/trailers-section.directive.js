@@ -2,6 +2,7 @@
  * Created by chagen on 4/3/16.
  */
 (function () {
+    'use strict';
     function trailerSection($sce, theMovieDBService) {
 
         return {
@@ -13,7 +14,7 @@
             controller: function ($scope) {
                 theMovieDBService.getVideos($scope.movieId).then(function (data) {
                     $scope.trailers  = data.results.filter(function(video) {
-                        return video.site == "YouTube" && video.key !== null;
+                        return video.site === "YouTube" && video.key !== null;
                     });
                     $scope.setTrailer(0);
                 });
