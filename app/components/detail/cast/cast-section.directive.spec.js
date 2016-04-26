@@ -90,7 +90,7 @@ describe('Cast Section Directive Tests', function () {
             compileDirective();
             expect(isolateScope.cast.length).toBe(2);
         });
-        it('should not set cast when successfully retrieved', function () {
+        it('should not set cast when not successfully retrieved', function () {
             spyOn(mockMovieSvc, 'getCredits').and.callThrough();
             passPromise = false;
             compileDirective();
@@ -99,7 +99,6 @@ describe('Cast Section Directive Tests', function () {
         it('should have a total of 2', function () {
             spyOn(mockMovieSvc, 'getCredits').and.callThrough();
             compileDirective();
-            console.log(element);
             expect(isolateScope.total).toBe(2);
         });
 

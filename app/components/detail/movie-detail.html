@@ -25,7 +25,7 @@
 
                 <uib-tabset active="active">
                     <uib-tab index="0" heading="Overview">
-                        <overview-section></overview-section>
+                        <overview-section movie="movie.data"></overview-section>
                     </uib-tab>
                     <uib-tab index="1" heading="Trailers" select="movie.reInitIso()">
                         <trailers-section movie-id="{{movie.movieId}}"></trailers-section>
@@ -35,7 +35,7 @@
                     </uib-tab>
                     <uib-tab index="3" heading="Similar Titles" select="movie.reInitIso()">
                         <p style="margin-top: 20px">
-                            <similar-section movie-id="{{movie.movieId}}" go="go(path)" favorites="favorites"></similar-section>
+                            <similar-section movie-id="{{movie.movieId}}" favorites="favorites"></similar-section>
                         </p>
                     </uib-tab>
 

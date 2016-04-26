@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    function favoriteService($rootScope, $http) {
+    function favoriteService($rootScope, $log, $http) {
 
         var factory = {};
         factory.getFavorites = function () {
@@ -12,7 +12,7 @@
         };
 
         factory.removeFavorite = function (fav, cb) {
-            console.log("Removing favorite from profile ", fav);
+            $log.info("Removing favorite from profile ", fav);
             $http.delete("http://localhost:3000/profile/54166d47c0edc80000a81de4/favorite/" + fav._id).success(cb);
         };
         factory.addFavorite = function (fav, cb) {

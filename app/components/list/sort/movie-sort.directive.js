@@ -2,33 +2,35 @@
  * Created by chagen on 4/3/16.
  */
 (function () {
-    function sortController($scope) {
-        $scope.sortedAsc = function (column) {
-            return $scope.orderProp == column && !$scope.sortReverse;
-        };
+     'use strict';
 
-        $scope.sortedDesc = function (column) {
-            return $scope.orderProp == column && $scope.sortReverse;
-        };
+    function sortDirective($log) {
+        var link = function($scope) {
+            $scope.sortedAsc = function (column) {
+                return $scope.orderProp === column && !$scope.sortReverse;
+            };
 
-        $scope.setSortOrder = function (value, sortAscending) {
-            // If same sort value, use previous descending flag which should be the current ascending flag
-            if (value == $scope.orderProp) {
-                sortAscending = $scope.sortReverse;
-            }
-            console.log("Sorting by ", value, ", ascending ", sortAscending);
-            $scope.orderProp = value;
-            $scope.sortReverse = !sortAscending;
-        };
-        $scope.setSortOrder('title', true);
-    }
+            $scope.sortedDesc = function (column) {
+                return $scope.orderProp === column && $scope.sortReverse;
+            };
 
-    function sortDirective() {
+            $scope.setSortOrder = function (value, sortAscending) {
+                // If same sort value, use previous descending flag which should be the current ascending flag
+                if (value === $scope.orderProp) {
+                    sortAscending = $scope.sortReverse;
+                }
+                $log.info("Sorting by ", value, ", ascending ", sortAscending);
+                $scope.orderProp = value;
+                $scope.sortReverse = !sortAscending;
+            };
+            $scope.setSortOrder('title', true);
+        };
+        
         return {
             restrict: 'E',
             scope: {},
             templateUrl: 'components/list/sort/movie-sort.html',
-            controller:  sortController
+            link:  link
         };
     }
 

@@ -3,7 +3,7 @@
  */
 (function () {
     'use strict';
-    function similarSection($rootScope, theMovieDBService) {
+    function similarSection($rootScope, $log, theMovieDBService) {
 
         var similarController = function ($scope) {
             var vm = this;
@@ -15,19 +15,15 @@
                     vm.total_results = data.total_results;
                 });
             };
-            vm.go = function (value) {
-                // Need to pass an object that matches to the parameter name of passed in method
-                vm.goTo({path: value});
-            };
         };
 
         return {
             restrict: 'E',
-            scope: {},
-            bindToController: {
-                movieId: '@',
-                goTo: '&go',
+            scope: {
                 favorites: '='
+            },
+            bindToController: {
+                movieId: '@'
             },
             controller: similarController,
             controllerAs: 'movieList',

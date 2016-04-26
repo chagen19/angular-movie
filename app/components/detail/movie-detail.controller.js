@@ -1,8 +1,9 @@
 (function () {
     'use strict';
 
-    var detailCtrl = function($scope, $timeout, $stateParams, theMovieDBService) {
+    var detailCtrl = function($scope, $log, $timeout, $stateParams, theMovieDBService) {
         var vm = this;
+
         // So movie id is available immediately to gather the additional data
         var movieId = $stateParams.movieId;
         vm.movieId = movieId;
@@ -14,7 +15,7 @@
         vm.reInitIso = function () {
             // Fix to delay isotop until images are loaded
             $timeout(function () {
-                console.log('Re-initiating isotope');
+                $log.info('Re-initiating isotope');
                 $scope.$broadcast('isotope.onLayout');
             }, 700);
         };

@@ -14,8 +14,7 @@
     }
 
     angular.module('movieApp.movieList', [
-        'movieApp.theMovieDB.services',
-        'movieApp.favorites'
+        'movieApp.theMovieDB.services'
     ])
         .controller('ListCtrl', listController);
 })();

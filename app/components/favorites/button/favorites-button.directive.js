@@ -3,7 +3,26 @@
  */
 (function () {
     'use strict';
-    function favoriteButton(favoriteService) {
+    function favoriteButton($log, favoriteService) {
+        var link = function(scope) {
+
+            scope.addFavorite = function (fav) {
+                fav.source = 'themoviedb';
+                favoriteService.addFavorite(fav, function (data) {
+                    $log.debug("Emitting favoriteAdded Event");
+                    scope.$emit('favoriteAdded', data);
+                });
+            };
+
+            scope.removeFavorite = function (fav) {
+                favoriteService.removeFavorite(scope.favorites[fav.id], function () {
+                    $log.debug("Emitting favoriteRemoved Event", fav);
+                    scope.$emit('favoriteRemoved', fav);
+                });
+            };
+            
+        };
+        
         return {
             restrict: 'E',
             scope: {
@@ -11,27 +30,7 @@
                 movie: '='
             },
             templateUrl: 'components/favorites/button/favorite-button.html',
-            controller: function ($scope) {
-                $scope.addFavorite = function (fav) {
-                    console.log("FAV", $scope.favorites);
-                    fav.source = 'themoviedb';
-                    console.log("Adding Favorite");
-                    favoriteService.addFavorite(fav, function (data) {
-                        console.log("Emitting favoriteAdded Event");
-                        $scope.$emit('favoriteAdded', data);
-                    });
-                };
-
-                $scope.removeFavorite = function (fav) {
-                    console.log("Removing Favorite");
-                    favoriteService.removeFavorite($scope.favorites[fav.id], function () {
-                        console.log("Emitting favoriteRemoved Event", fav);
-                        $scope.$emit('favoriteRemoved', fav);
-                    });
-                };
-
-
-            }
+            link: link
         };
     }
     angular.module('movieApp.favorites')

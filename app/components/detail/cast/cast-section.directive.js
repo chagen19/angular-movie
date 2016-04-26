@@ -9,13 +9,13 @@
         var link = function (scope) {
             scope.maxDisplay = 18;
             scope.url = $rootScope.url;
-            scope.getCast = function () {
+            var getCast = function () {
                 theMovieDBService.getCredits(scope.movieId).then(function (data) {
                     scope.cast = data.cast;
                     scope.total = (data.cast.length > scope.maxDisplay) ? scope.maxDisplay : data.cast.length;
                 });
             };
-            scope.getCast();
+            getCast();
         };
 
         return {

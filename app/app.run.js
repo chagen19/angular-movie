@@ -8,11 +8,11 @@
                 profileId = settings.profileId;
                 debug = settings.debug;
             },
-            $get: function ($rootScope, $location, theMovieDBService, favoriteService) {
+            $get: function ($rootScope, $log, $location, theMovieDBService, favoriteService) {
 
                 return {
                     initialize: function () {
-                        console.log("Initializing App");
+                        $log.info("Initializing App");
 
                         theMovieDBService.getConfigurationData().then(function (data) {
                             $rootScope.url = data.images.base_url;
@@ -21,15 +21,8 @@
                         $rootScope.tid = 0;
                         $rootScope.profileId = profileId;
 
-                        $rootScope.activeTabIndex = 0;
-                        $rootScope.searchTabIndex = 0;
-                        $rootScope.favoritesTabIndex = 1;
-                        $rootScope.nowPlayingTabIndex = 2;
-                        $rootScope.topRatedTabIndex = 3;
-
-
                         function refreshFavorites() {
-                            console.log("Refreshing Favorites");
+                            $log.info("Refreshing Favorites");
                             favoriteService.getFavorites().success(function (data) {
                                 storeFavoritesInScope(data.favorites);
                             });
@@ -40,18 +33,16 @@
                             for (var i = 0, len = favs.length; i < len; i++) {
                                 $rootScope.favorites[favs[i].id] = favs[i];
                             }
-
                         }
 
                         $rootScope.storeFavoritesInScope = storeFavoritesInScope;
-
                         $rootScope.$on('favoriteAdded', function () {
-                            console.log("Root Scope Received favoriteAdded Event");
+                            $log.info("Root Scope Received favoriteAdded Event");
                             refreshFavorites();
                         });
 
                         $rootScope.$on('favoriteRemoved', function () {
-                            console.log("Root Scope Received favoriteRemoved Event");
+                            $log.info("Root Scope Received favoriteRemoved Event");
                             refreshFavorites();
                         });
 
