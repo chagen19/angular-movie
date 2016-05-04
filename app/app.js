@@ -14,8 +14,6 @@
             'movieApp.topRated',
             'movieApp.common',
             'ui.bootstrap',
-            'iso.directives',
-            'MovieCardTemplates',
-            'movieApp.movieCard'
+            'iso.directives'
         ]);
 })();

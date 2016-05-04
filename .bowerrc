@@ -1,3 +1,8 @@
 {
-  "directory": "bower_components"
+  "directory": "bower_components",
+  "registry" : "https://repo.pg-dev.net/artifactory/api/bower/bower-experimental",
+  "resolvers" : [
+    "bower-art-resolver"
+  ],
+  "ca": "/usr/local/share/ca-certificates/ipa-001.crt"
 }
