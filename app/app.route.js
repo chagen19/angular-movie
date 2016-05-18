@@ -29,8 +29,7 @@
                 controller: 'TopRatedController as movieList'
             }).state('main', {
                 url: '/',
-                templateUrl: 'components/search/movie-search.html',
-                controller: 'SearchController as search'
+                templateUrl: 'index.html'
             });
 
         })

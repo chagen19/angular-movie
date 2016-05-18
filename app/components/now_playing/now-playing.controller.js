@@ -8,13 +8,6 @@
             vm.total = data.results.length;
             vm.total_results = data.total_results;
         });
-
-        $scope.$watch("movieList.filter", function(newValue) {
-            if(newValue) {
-                $scope.$broadcast('iso-init', {name: null, params: null});
-            }
-        });
-
     }
 
     angular.module('movieApp.nowPlaying', [

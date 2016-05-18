@@ -7,6 +7,7 @@
     angular.module('movieApp.movieDetail')
         .component('overviewSection', {
             templateUrl: 'components/detail/overview/overview-section.html',
+            controllerAs: 'overview',
             bindings: {
                 movie: '='
             }

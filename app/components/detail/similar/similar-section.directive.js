@@ -7,13 +7,6 @@
     var similarController = function ($scope, $log, TheMovieDBService) {
         var vm = this;
 
-        // Re-init isotope when filter changes to re-arrange movie cards
-        $scope.$watch("movieList.filter", function (newValue) {
-            if (newValue) {
-                $scope.$broadcast('iso-init', {name: null, params: null});
-            }
-        });
-
         TheMovieDBService.getSimilarMovies(vm.movieId).then(function (movies) {
             vm.results = movies.results;
             vm.total = movies.results.length;

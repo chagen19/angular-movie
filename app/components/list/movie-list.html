@@ -1,13 +1,26 @@
-<movie-sort></movie-sort>
-<input type="text" ng-model="movieList.filter"/>
-<div id="movieContainer" isotope-container iso-use-init-event="false">
-	<div class="grid-sizer"></div>
-	<div class="isotope-item" isotope-item ng-repeat="movie in movieList.results | filter: movieList.filter track by movie.id" ng:show="movie.poster_path != null">
-		<p current-item='{{$index}}' total-results="{{movieList.total}}">
-			<movie-card movie="movie"></movie-card>
-		</p>
-	</div>
-	<div id="noResults" ng:show="null == movieList">
-		No Results Found
-	</div>
+<div class="row">
+    <div class="col-xs-9">
+        <movie-sort></movie-sort>
+    </div>
+    <div class="col-xs-3">
+        <div class="input-group" class="pull-right">
+
+            <span class="input-group-addon" id="filter-addon"><i class="fa fa-filter" aria-hidden="true"></i></span>
+            <input type="text" class="form-control" placeholder="Filter" aria-describedby="filter-addon"
+                   ng-model="movieList.filter">
+        </div>
+    </div>
 </div>
+    <div id="movieContainer" isotope-container iso-use-init-event="false" iso-filter-watcher="movieList.filter">
+        <div class="grid-sizer"></div>
+        <div class="isotope-item" isotope-item
+             ng-repeat="movie in movieList.results | filter: movieList.filter track by movie.id"
+             ng:show="movie.poster_path != null">
+            <p current-item='$index' total-results="{{movieList.total}}">
+                <movie-card movie="movie"></movie-card>
+            </p>
+        </div>
+        <div id="noResults" ng:show="null == movieList">
+            No Results Found
+        </div>
+    </div>

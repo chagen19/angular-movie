@@ -13,26 +13,62 @@
 </head>
 <body>
 <!--<ul class="menu">-->
-    <!--<li>Debug: <input type="checkbox" ng-model="debug"></li>-->
-    <!--<li>Url:{{url}}</li>-->
-    <!--<li>ProfileId:{{profileId}}</li>-->
-    <!--<li>MovieId:{{movieId}}</li>-->
+<!--<li>Debug: <input type="checkbox" ng-model="debug"></li>-->
+<!--<li>Url:{{url}}</li>-->
+<!--<li>ProfileId:{{profileId}}</li>-->
+<!--<li>MovieId:{{movieId}}</li>-->
 <!--</ul>-->
+<nav class="navbar-static-top navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-9" aria-expanded="false"><span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">AngularJS Movies</a></div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+            <ul class="nav navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" ng-click="go('/')">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ng-click="go('/favorites')">Favorites</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ng-click="go('/now-playing')">In Theatres</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ng-click="go('/top-rated')">Top Rated</a>
+                </li>
 
-<div class="container" id="con">
-    <div class="page-header">
-        <h1>AngularJS Movie App</h1>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <uib-tabset active="activeTabIndex">
-                <uib-tab heading="Search" select="go('/')" index="0"></uib-tab>
-                <uib-tab heading="Favorites" select="go('/favorites')" index="1"></uib-tab>
-                <uib-tab heading="In Theaters" select="go('/now-playing')" index="2"></uib-tab>
-                <uib-tab heading="Top Rated" select="go('/top-rated')" index="3"></uib-tab>
-            </uib-tabset>
+            </ul>
+            <movie-search></movie-search>
         </div>
     </div>
+    <!--<div uib-collapse="isCollapsed">-->
+        <!--<div class="well well-sm" style="background-color: #222; border-color: #222;-->
+  <!--border-top-color: #080808;">-->
+            <!--<div class="row">-->
+                <!--<div class="col-xs-5">-->
+                    <!--<movie-sort></movie-sort>-->
+                <!--</div>-->
+                <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="col-xs-3">-->
+                    <!--<div class="input-group" class="pull-right">-->
+
+                    <!--<span class="input-group-addon" id="filter-addon"><i class="fa fa-filter"-->
+                                                                         <!--aria-hidden="true"></i></span>-->
+                        <!--<input type="text" class="form-control" placeholder="Filter" aria-describedby="filter-addon"-->
+                               <!--ng-model="movieList.filter">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+</nav>
+
+<div class="container" id="con">
     <div class="row">
         <div class="col-xs-12">
             <p>
@@ -49,7 +85,6 @@
     };
 </script>
 
-<script src="../bower_components/PACE/pace.js"></script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../bower_components/jquery/dist/jquery.js"></script>
@@ -86,7 +121,7 @@
 <script src="components/favorites/favorites.controller.js"></script>
 <script src="components/favorites/favorites.service.js"></script>
 <script src="components/favorites/button/favorites-button.directive.js"></script>
-<script src="components/search/movie-search.controller.js"></script>
+<script src="components/search/movie-search.directive.js"></script>
 <script src="components/now_playing/now-playing.controller.js"></script>
 <script src="components/top_rated/top-rated.controller.js"></script>
 

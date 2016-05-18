@@ -20,11 +20,6 @@
             });
         });
 
-        $scope.$watch("movieList.filter", function(newValue) {
-            if(newValue) {
-                $scope.$broadcast('iso-init', {name: null, params: null});
-            }
-        });
         // Remove movie from list and refresh isotope
         $scope.$on('favoriteRemoved', function (event, fav) {
             $log.debug("Received favoriteRemoved Event", fav.id);

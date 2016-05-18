@@ -11,7 +11,6 @@
             vm.image_url = imageBaseUrl;
             return TheMovieDBService.getCredits(vm.movieId);
         }).then(function (credits) {
-            console.log("Got credits", credits)
             vm.cast = credits.cast;
             vm.total = (credits.cast.length > vm.maxDisplay) ? vm.maxDisplay : credits.cast.length;
         });

@@ -20,7 +20,6 @@
         vm.active = 0;
 
         TheMovieDBService.getImageBaseUrl().then(function (imageBaseUrl) {
-            console.log("Got URL")
             vm.image_url = imageBaseUrl;
             return TheMovieDBService.getImages(vm.movieId);
         }).then(function (images) {
