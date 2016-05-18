@@ -28,14 +28,14 @@
     }
 
     angular.module('movieApp')
-        .config(function (initProvider, TheMovieDBServiceProvider) {
-            initProvider.configure({profileId: 1, debug: false});
+        .config(function (InitProvider, TheMovieDBServiceProvider) {
+            InitProvider.configure({profileId: 1, debug: false});
             TheMovieDBServiceProvider.configure({cache: true})
         })
-        .run(function (init) {
-            init.initialize();
+        .run(function (Init) {
+            Init.initialize();
         })
-        .provider('init', initProvider)
+        .provider('Init', initProvider)
     .value('theMovieDBBaseUrl', 'https://api.themoviedb.org/3')
     .value('theMovieDBApiKey', '013eff1b8075d646416de6ec45620619')
     .value('FavoriteServiceBaseUrl', 'http://localhost:3000');
