@@ -1,9 +1,9 @@
 <div class="text-center">
-    <button ng-click="addFavorite(movie);" class="btn btn-default btn-block" ng:hide="favorites[movie.id]">
+    <button ng-click="favoriteButton.addFavorite(favoriteButton.movie);" class="btn btn-default btn-block" ng:hide="favoriteButton.isFavorite()">
         <span class="glyphicon glyphicon-star-empty"></span>
         Add
     </button>
-    <button ng-click="removeFavorite(movie);" class="btn btn-default btn-block" ng:show="favorites[movie.id]">
+    <button ng-click="favoriteButton.removeFavorite(favoriteButton.movie);" class="btn btn-default btn-block" ng:show="favoriteButton.isFavorite()">
         <span class="glyphicon glyphicon-star"></span>
         Remove
     </button>

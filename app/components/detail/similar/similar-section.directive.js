@@ -3,35 +3,31 @@
  */
 (function () {
     'use strict';
-    function similarSection($log, TheMovieDBService) {
 
-        var similarController = function ($scope) {
-            var vm = this;
-            vm.getSimilarMovies = function () {
-                TheMovieDBService.getSimilarMovies(vm.movieId).then(function (data) {
-                    vm.results = data.results;
-                    vm.total = data.results.length;
-                    vm.total_results = data.total_results;
-                });
-            };
-        };
+    var similarController = function ($scope, $log, TheMovieDBService) {
+        var vm = this;
 
-        return {
-            restrict: 'E',
-            scope: {},
-            bindToController: {
-                movieId: '@'
-            },
-            controller: similarController,
-            controllerAs: 'movieList',
-            link: function (scope) {
-                scope.movieList.getSimilarMovies();
-            },
-            templateUrl: 'components/list/movie-list.html'
-        };
-    }
+        // Re-init isotope when filter changes to re-arrange movie cards
+        $scope.$watch("movieList.filter", function (newValue) {
+            if (newValue) {
+                $scope.$broadcast('iso-init', {name: null, params: null});
+            }
+        });
+
+        TheMovieDBService.getSimilarMovies(vm.movieId).then(function (movies) {
+            vm.results = movies.results;
+            vm.total = movies.results.length;
+            vm.total_results = movies.total_results;
+        });
+    };
 
     angular.module('movieApp.movieDetail')
-        .directive('similarSection', similarSection);
-
+        .component('similarSection', {
+            templateUrl: 'components/list/movie-list.html',
+            controller: similarController,
+            controllerAs: 'movieList',
+            bindings: {
+                movieId: '@'
+            }
+        });
 })();

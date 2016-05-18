@@ -4,38 +4,36 @@
 (function () {
      'use strict';
 
-    function sortDirective($log) {
-        var link = function($scope) {
-            $scope.sortedAsc = function (column) {
-                return $scope.orderProp === column && !$scope.sortReverse;
+        var movieSortController = function($log) {
+            var vm = this;
+            vm.sortedAsc = function (column) {
+                return vm.orderProp === column && !vm.sortReverse;
             };
 
-            $scope.sortedDesc = function (column) {
-                return $scope.orderProp === column && $scope.sortReverse;
+            vm.sortedDesc = function (column) {
+                return vm.orderProp === column && vm.sortReverse;
             };
 
-            $scope.setSortOrder = function (value, sortAscending) {
+            vm.setSortOrder = function (value, sortAscending) {
                 // If same sort value, use previous descending flag which should be the current ascending flag
-                if (value === $scope.orderProp) {
-                    sortAscending = $scope.sortReverse;
+                if (value === vm.orderProp) {
+                    sortAscending = vm.sortReverse;
                 }
                 $log.info("Sorting by ", value, ", ascending ", sortAscending);
-                $scope.orderProp = value;
-                $scope.sortReverse = !sortAscending;
+                vm.orderProp = value;
+                vm.sortReverse = !sortAscending;
             };
-            $scope.setSortOrder('title', true);
+            vm.setSortOrder('title', true);
         };
         
-        return {
-            restrict: 'E',
-            scope: {},
-            templateUrl: 'components/list/sort/movie-sort.html',
-            link:  link
-        };
-    }
+      
 
     angular.module('movieApp.movieList')
-        .directive('movieSort', sortDirective);
+        .component('movieSort', {
+            templateUrl: 'components/list/sort/movie-sort.html',
+            controller: movieSortController,
+            controllerAs: 'sort'
+        });
 
 })();
     

@@ -1,24 +1,24 @@
-<div class="row" ng:show="trailer.key != null">
+<div class="row" ng:show="video.trailer.key != null">
 	<div class="col-xs-8">
 		<p>
 			<div class="dropdown">
 				<button id="dLabel" class="btn btn-default" data-toggle="dropdown">
-					{{trailer.name}} <span class="caret"></span>
+					{{video.trailer.name}} <span class="caret"></span>
 				</button>
-				<span class="label label-default">{{trailer.size}}</span>
+				<span class="label label-default">{{video.trailer.size}}</span>
 				<ul class="dropdown-menu">
-					<li ng-repeat="t in trailers">
-						<span class="hand" ng-click="setTrailer($index);">
-							<i class="fa fa-youtube"></i> {{t.name}}
+					<li ng-repeat="trailer in video.trailers">
+						<span class="hand" ng-click="video.setTrailer($index);">
+							<i class="fa fa-youtube"></i> {{trailer.name}}
 						</span>
 					</li>
 				</ul>
 			</div>
 		</p>
-		<p ng:show="trailer.key != null">
+		<p ng:show="video.trailer.key != null">
 			<div class="embed-responsive embed-responsive-16by9">
 				<iframe class="embed-responsive-item" id="player" type="text/html"
-				ng-src="{{yturl}}" frameborder="1" allowfullscreen="1"></iframe>
+				ng-src="{{video.yturl}}" frameborder="1" allowfullscreen="1"></iframe>
 			</div>
 		</p>
 	</div>

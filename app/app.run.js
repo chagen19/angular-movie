@@ -36,7 +36,19 @@
             Init.initialize();
         })
         .provider('Init', initProvider)
-    .value('theMovieDBBaseUrl', 'https://api.themoviedb.org/3')
-    .value('theMovieDBApiKey', '013eff1b8075d646416de6ec45620619')
+        .factory('loggingInterceptor', function($q, TheMovieDBService) {
+
+            return {
+                request: function (config) {
+                    config.startTime = new Date().getTime();
+                    return config;
+                    
+                }
+
+            }
+
+        })
+    .value('TheMovieDBBaseUrl', 'https://api.themoviedb.org/3')
+    .value('TheMovieDBApiKey', '013eff1b8075d646416de6ec45620619')
     .value('FavoriteServiceBaseUrl', 'http://localhost:3000');
 })();

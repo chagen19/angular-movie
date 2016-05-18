@@ -4,33 +4,26 @@
 (function () {
     'use strict';
 
-    function castSection(TheMovieDBService) {
-
-        var link = function (scope) {
-            scope.maxDisplay = 18;
-
-            TheMovieDBService.getImageBaseUrl().then(function (data) {
-                scope.url = data;
-            });
-            var getCast = function () {
-                TheMovieDBService.getCredits(scope.movieId).then(function (data) {
-                    scope.cast = data.cast;
-                    scope.total = (data.cast.length > scope.maxDisplay) ? scope.maxDisplay : data.cast.length;
-                });
-            };
-            getCast();
-        };
-
-        return {
-            restrict: 'E',
-            scope: {
-                movieId: '@'
-            },
-            link: link,
-            templateUrl: 'components/detail/cast/cast-section.html'
-        };
-    }
+    var castController = function (TheMovieDBService) {
+        var vm = this;
+        vm.maxDisplay = 18;
+        TheMovieDBService.getImageBaseUrl().then(function (imageBaseUrl) {
+            vm.image_url = imageBaseUrl;
+            return TheMovieDBService.getCredits(vm.movieId);
+        }).then(function (credits) {
+            console.log("Got credits", credits)
+            vm.cast = credits.cast;
+            vm.total = (credits.cast.length > vm.maxDisplay) ? vm.maxDisplay : credits.cast.length;
+        });
+    };
 
     angular.module('movieApp.movieDetail')
-        .directive('castSection', castSection);
+        .component('castSection', {
+            templateUrl: 'components/detail/cast/cast-section.html',
+            controller: castController,
+            controllerAs: 'credits',
+            bindings: {
+                movieId: '@'
+            }
+        });
 })();

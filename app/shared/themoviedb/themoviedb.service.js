@@ -8,14 +8,14 @@
             configure: function (options) {
                 opts = options;
             },
-            $get: function ($log, $q, Restangular, theMovieDBBaseUrl, theMovieDBApiKey) {
+            $get: function ($log, $q, Restangular, TheMovieDBBaseUrl, TheMovieDBApiKey) {
                 var configurationData;
                 var initRestangular = function () {
                     $log.info("Initializing TheMovieDBService with options", opts);
                     return Restangular.withConfig(function (Configurer) {
-                        Configurer.setBaseUrl(theMovieDBBaseUrl);
+                        Configurer.setBaseUrl(TheMovieDBBaseUrl);
                         Configurer.setDefaultRequestParams({
-                            api_key: theMovieDBApiKey
+                            api_key: TheMovieDBApiKey
                         });
                         if (opts.cache)
                             Configurer.setDefaultHttpFields({cache: opts.cache});
