@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    var detailCtrl = function($scope, $log, $timeout, $stateParams, theMovieDBService) {
+    var detailCtrl = function($scope, $log, $timeout, $stateParams, TheMovieDBService) {
         var vm = this;
 
         // So movie id is available immediately to gather the additional data
         var movieId = $stateParams.movieId;
         vm.movieId = movieId;
-        theMovieDBService.getMovieById(movieId).then(function (data) {
+        TheMovieDBService.getMovieById(movieId).then(function (data) {
             vm.data = data;
         });
 

@@ -8,48 +8,19 @@
                 profileId = settings.profileId;
                 debug = settings.debug;
             },
-            $get: function ($rootScope, $log, $location, theMovieDBService, favoriteService) {
+            $get: function ($rootScope, $log, $location, TheMovieDBService, FavoriteService) {
 
                 return {
                     initialize: function () {
                         $log.info("Initializing App");
-
-                        theMovieDBService.getConfigurationData().then(function (data) {
-                            $rootScope.url = data.images.base_url;
-                        });
                         $rootScope.debug = debug;
                         $rootScope.tid = 0;
                         $rootScope.profileId = profileId;
 
-                        function refreshFavorites() {
-                            $log.info("Refreshing Favorites");
-                            favoriteService.getFavorites().success(function (data) {
-                                storeFavoritesInScope(data.favorites);
-                            });
-                        }
-
-                        function storeFavoritesInScope(favs) {
-                            $rootScope.favorites = {};
-                            for (var i = 0, len = favs.length; i < len; i++) {
-                                $rootScope.favorites[favs[i].id] = favs[i];
-                            }
-                        }
-
-                        $rootScope.storeFavoritesInScope = storeFavoritesInScope;
-                        $rootScope.$on('favoriteAdded', function () {
-                            $log.info("Root Scope Received favoriteAdded Event");
-                            refreshFavorites();
-                        });
-
-                        $rootScope.$on('favoriteRemoved', function () {
-                            $log.info("Root Scope Received favoriteRemoved Event");
-                            refreshFavorites();
-                        });
-
                         $rootScope.go = function (path) {
                             $location.path(path);
                         };
-                        refreshFavorites();
+                        FavoriteService.getFavoritesStore();
                     }
                 };
             }
@@ -57,11 +28,15 @@
     }
 
     angular.module('movieApp')
-        .config(function (initProvider) {
+        .config(function (initProvider, TheMovieDBServiceProvider) {
             initProvider.configure({profileId: 1, debug: false});
+            TheMovieDBServiceProvider.configure({cache: true})
         })
         .run(function (init) {
             init.initialize();
         })
-        .provider('init', initProvider);
+        .provider('init', initProvider)
+    .value('theMovieDBBaseUrl', 'https://api.themoviedb.org/3')
+    .value('theMovieDBApiKey', '013eff1b8075d646416de6ec45620619')
+    .value('FavoriteServiceBaseUrl', 'http://localhost:3000');
 })();

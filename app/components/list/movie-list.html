@@ -3,7 +3,7 @@
 	<div class="grid-sizer"></div>
 	<div class="isotope-item" isotope-item ng-repeat="movie in movieList.results track by movie.id" ng:show="movie.poster_path != null">
 		<p current-item='{{$index}}' total-results="{{movieList.total}}">
-			<movie-card movie="movie" favorites="favorites" url="{{url}}"></movie-card>
+			<movie-card movie="movie"></movie-card>
 		</p>
 	</div>
 	<div id="noResults" ng:show="null == movieList">

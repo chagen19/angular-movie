@@ -1,10 +1,10 @@
-<form class="form-inline" role="form">
-	<div class="input-group col-sm-3">
-		<label for="movieNameTxt" class="sr-only">Movie Name</label>
-		<input id="movieNameTxt" ng-model="movieName" class="form-control" placeholder="Enter Movie Name">
+<form class="form-inline" role="form" ng-submit="go('/search/' + search.movieName)">
+    <div class="input-group col-sm-3">
+        <label for="movieNameTxt" class="sr-only">Movie Name</label>
+        <input id="movieNameTxt" ng-model="search.movieName" class="form-control" placeholder="Enter Movie Name" required>
 		<span class="input-group-btn">
-			<a href="#/search/{{movieName}}" class="btn btn-primary" role="button">Search</a>
+			<button class="btn btn-primary" role="submit">Search</button>
 		</span>
-	</div>
-	<!--<a href="" ng-href="#/favorites" role="button">Favorites</a>-->
+    </div>
+    <!--<a href="" ng-href="#/favorites" role="button">Favorites</a>-->
 </form>

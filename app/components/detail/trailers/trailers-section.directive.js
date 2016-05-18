@@ -3,7 +3,7 @@
  */
 (function () {
     'use strict';
-    function trailerSection($log, $sce, theMovieDBService) {
+    function trailerSection($log, $sce, TheMovieDBService) {
 
         function link(scope) {
             scope.setTrailer = function (index) {
@@ -16,7 +16,7 @@
             };
 
             var getVideos = function () {
-                theMovieDBService.getVideos(scope.movieId).then(function (data) {
+                TheMovieDBService.getVideos(scope.movieId).then(function (data) {
                     scope.trailers = data.results.filter(function (video) {
                         return video.site === "YouTube" && video.key !== null;
                     });

@@ -3,13 +3,12 @@
  */
 (function () {
     'use strict';
-    function similarSection($rootScope, $log, theMovieDBService) {
+    function similarSection($log, TheMovieDBService) {
 
         var similarController = function ($scope) {
             var vm = this;
-            $scope.url = $rootScope.url;
             vm.getSimilarMovies = function () {
-                theMovieDBService.getSimilarMovies(vm.movieId).then(function (data) {
+                TheMovieDBService.getSimilarMovies(vm.movieId).then(function (data) {
                     vm.results = data.results;
                     vm.total = data.results.length;
                     vm.total_results = data.total_results;
@@ -19,9 +18,7 @@
 
         return {
             restrict: 'E',
-            scope: {
-                favorites: '='
-            },
+            scope: {},
             bindToController: {
                 movieId: '@'
             },
@@ -30,7 +27,7 @@
             link: function (scope) {
                 scope.movieList.getSimilarMovies();
             },
-            templateUrl: 'components/list/movie-list.html',
+            templateUrl: 'components/list/movie-list.html'
         };
     }
 

@@ -1,54 +1,75 @@
 (function () {
     'use strict';
 
-    function theMovieDBFactory(Restangular) {
-        var restAngular =
-            Restangular.withConfig(function (Configurer) {
-                Configurer.setBaseUrl('https://api.themoviedb.org/3');
-                Configurer.setDefaultRequestParams({
-                    api_key: '013eff1b8075d646416de6ec45620619'
-                });
-                Configurer.setDefaultHttpFields({cache: true});
-            });
-        var _movieService = restAngular.all('movie');
-
-        function getContent(movieId, typeOfContent) {
-            return restAngular.one('movie', movieId).one(typeOfContent).get();
-        }
+    function TheMovieDBServiceProvider() {
+        var opts = {};
 
         return {
-            getMovies: function (searchCriteria) {
-                return restAngular.all('search').get('movie', {query: searchCriteria});
+            configure: function (options) {
+                opts = options;
             },
-            getConfigurationData: function () {
-                return restAngular.one('configuration').get();
-            },
-            getMovieById: function (movieId) {
-                return _movieService.get(movieId);
-            },
-            getNowPlaying: function () {
-                return _movieService.get('now_playing');
-            },
-            getTopRated: function () {
-                return _movieService.get('top_rated');
-            },
-            getImages: function (movieId) {
-                return getContent(movieId, 'images');
-            },
-            getVideos: function (movieId) {
-                return getContent(movieId, 'videos');
-            },
-            getCredits: function (movieId) {
-                return getContent(movieId, 'credits');
-            },
-            getSimilarMovies: function (movieId) {
-                return getContent(movieId, 'similar');
+            $get: function ($log, $q, Restangular, theMovieDBBaseUrl, theMovieDBApiKey) {
+                var configurationData;
+                var initRestangular = function () {
+                    $log.info("Initializing TheMovieDBService with options", opts);
+                    return Restangular.withConfig(function (Configurer) {
+                        Configurer.setBaseUrl(theMovieDBBaseUrl);
+                        Configurer.setDefaultRequestParams({
+                            api_key: theMovieDBApiKey
+                        });
+                        if (opts.cache)
+                            Configurer.setDefaultHttpFields({cache: opts.cache});
+                    });
+                };
+
+                var getConfigurationData = function() {
+                      return restAngular.one('configuration').get();
+
+                };
+                var getContent = function (movieId, typeOfContent) {
+                    return restAngular.one('movie', movieId).one(typeOfContent).get();
+                };
+
+                var restAngular = initRestangular();
+                var _movieService = restAngular.all('movie');
+
+                return {
+                    getMovies: function (searchCriteria) {
+                        return restAngular.all('search').get('movie', {query: searchCriteria});
+                    },
+                    getImageBaseUrl: function () {
+                        var deferred = $q.defer();
+                       getConfigurationData().then(function(data) {
+                            deferred.resolve(data.images.base_url);
+                        });
+                        return deferred.promise;
+                    },
+                    getMovieById: function (movieId) {
+                        return _movieService.get(movieId);
+                    },
+                    getNowPlaying: function () {
+                        return _movieService.get('now_playing');
+                    },
+                    getTopRated: function () {
+                        return _movieService.get('top_rated');
+                    },
+                    getImages: function (movieId) {
+                        return getContent(movieId, 'images');
+                    },
+                    getVideos: function (movieId) {
+                        return getContent(movieId, 'videos');
+                    },
+                    getCredits: function (movieId) {
+                        return getContent(movieId, 'credits');
+                    },
+                    getSimilarMovies: function (movieId) {
+                        return getContent(movieId, 'similar');
+                    }
+                }
             }
         };
     }
 
     angular.module('movieApp.theMovieDB.services', ['restangular'])
-        .factory('theMovieDBService', theMovieDBFactory);
-    // .value('apiUrl', 'https://api.themoviedb.org/3')
-    // .value('apiKey', '013eff1b8075d646416de6ec45620619');
+        .provider('TheMovieDBService', TheMovieDBServiceProvider);
 })();

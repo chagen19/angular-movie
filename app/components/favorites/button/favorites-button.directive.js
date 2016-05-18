@@ -3,30 +3,37 @@
  */
 (function () {
     'use strict';
-    function favoriteButton($log, favoriteService) {
+    function favoriteButton($log, FavoriteService) {
+
+
         var link = function(scope) {
+            var refreshFavorites = function() {
+                scope.favorites = FavoriteService.getFavoritesStore();
+            };
 
             scope.addFavorite = function (fav) {
                 fav.source = 'themoviedb';
-                favoriteService.addFavorite(fav, function (data) {
+                FavoriteService.addFavorite(fav).then(function () {
+                    refreshFavorites();
                     $log.debug("Emitting favoriteAdded Event");
-                    scope.$emit('favoriteAdded', data);
+                    scope.$emit('favoriteAdded', fav);
                 });
             };
 
             scope.removeFavorite = function (fav) {
-                favoriteService.removeFavorite(scope.favorites[fav.id], function () {
-                    $log.debug("Emitting favoriteRemoved Event", fav);
+                FavoriteService.removeFavorite(scope.favorites[fav.id]).then(function () {
+                    refreshFavorites();
+                    $log.debug("Emitting favoriteRemoved Event" );
                     scope.$emit('favoriteRemoved', fav);
                 });
             };
-            
+
+            refreshFavorites();
         };
         
         return {
             restrict: 'E',
             scope: {
-                favorites: '=',
                 movie: '='
             },
             templateUrl: 'components/favorites/button/favorite-button.html',

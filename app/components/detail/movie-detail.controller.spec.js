@@ -5,9 +5,9 @@ describe('MovieDetail Controller Tests', function () {
 
     var createController, $scope, $stateParams, $timeout, mockMovieSvc, passPromise;
 
-    // Provide Mock for theMovieDBService
+    // Provide Mock for TheMovieDBService
     beforeEach(module(function ($provide) {
-        $provide.factory('theMovieDBService', ['$q', function ($q) {
+        $provide.factory('TheMovieDBService', ['$q', function ($q) {
             function getMovieById(movieId) {
                 if (passPromise) {
                         return $q.when({movieData: "Data"});
@@ -22,11 +22,11 @@ describe('MovieDetail Controller Tests', function () {
         }]);
     }));
 
-    beforeEach(inject(function (_$controller_, _$rootScope_, _$timeout_, _theMovieDBService_) {
+    beforeEach(inject(function (_$controller_, _$rootScope_, _$timeout_, _TheMovieDBService_) {
         $scope = _$rootScope_.$new();
         $stateParams = {movieId: 1};
         $timeout = _$timeout_;
-        mockMovieSvc = _theMovieDBService_;
+        mockMovieSvc = _TheMovieDBService_;
 
         passPromise = true;
         
@@ -51,13 +51,13 @@ describe('MovieDetail Controller Tests', function () {
             var controller = createController();
             expect(controller.movieId).toBe(1);
         });
-        it('theMovieDBService should be called', function () {
+        it('TheMovieDBService should be called', function () {
             spyOn(mockMovieSvc, 'getMovieById').and.callThrough();
             createController();
             expect(mockMovieSvc.getMovieById).toHaveBeenCalled();
         });
 
-        it('theMovieDBService should be called with movieId of 1', function () {
+        it('TheMovieDBService should be called with movieId of 1', function () {
             spyOn(mockMovieSvc, 'getMovieById').and.callThrough();
             createController();
             expect(mockMovieSvc.getMovieById.calls.argsFor(0)).toEqual([1]);

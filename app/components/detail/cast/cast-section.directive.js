@@ -4,19 +4,21 @@
 (function () {
     'use strict';
 
-    function castSection($rootScope, theMovieDBService) {
+    function castSection(TheMovieDBService) {
 
         var link = function (scope) {
             scope.maxDisplay = 18;
-            scope.url = $rootScope.url;
+
+            TheMovieDBService.getImageBaseUrl().then(function (data) {
+                scope.url = data;
+            });
             var getCast = function () {
-                theMovieDBService.getCredits(scope.movieId).then(function (data) {
+                TheMovieDBService.getCredits(scope.movieId).then(function (data) {
                     scope.cast = data.cast;
                     scope.total = (data.cast.length > scope.maxDisplay) ? scope.maxDisplay : data.cast.length;
                 });
             };
             getCast();
-           
         };
 
         return {
