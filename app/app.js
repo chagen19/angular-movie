@@ -12,6 +12,7 @@
             'movieApp.movieSearch',
             'movieApp.nowPlaying',
             'movieApp.topRated',
+            'movieApp.upcoming',
             'movieApp.common',
             'ui.bootstrap',
             'iso.directives'

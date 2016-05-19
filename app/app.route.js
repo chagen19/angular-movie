@@ -27,11 +27,15 @@
                 url: '/top-rated',
                 templateUrl: 'components/list/movie-list.html',
                 controller: 'TopRatedCtrl as movieList'
+            }).state('upcoming', {
+                url: '/upcoming',
+                templateUrl: 'components/list/movie-list.html',
+                controller: 'UpcomingCtrl as movieList'
             }).state('main', {
                 url: '/',
                 templateUrl: 'components/search/movie-search.html',
                 controller: 'SearchCtrl'
             });
 
-        })
+        });
 })();

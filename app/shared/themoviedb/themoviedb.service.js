@@ -32,6 +32,9 @@
             getTopRated: function () {
                 return _movieService.get('top_rated');
             },
+            getUpcoming: function () {
+                return _movieService.get('upcoming');
+            },
             getImages: function (movieId) {
                 return getContent(movieId, 'images');
             },
