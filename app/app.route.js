@@ -18,24 +18,23 @@
             }).state('favorites', {
                 url: '/favorites',
                 templateUrl: 'components/list/movie-list.html',
-                controller: 'FavoritesCtrl as movieList'
+                controller: 'FavoritesController as movieList'
             }).state('now-playing', {
                 url: '/now-playing',
                 templateUrl: 'components/list/movie-list.html',
-                controller: 'NowPlayingCtrl as movieList'
+                controller: 'NowPlayingController as movieList'
             }).state('top-rated', {
                 url: '/top-rated',
                 templateUrl: 'components/list/movie-list.html',
-                controller: 'TopRatedCtrl as movieList'
+                controller: 'TopRatedController as movieList'
             }).state('upcoming', {
                 url: '/upcoming',
                 templateUrl: 'components/list/movie-list.html',
-                controller: 'UpcomingCtrl as movieList'
+                controller: 'TopRatedController as movieList'
             }).state('main', {
                 url: '/',
-                templateUrl: 'components/search/movie-search.html',
-                controller: 'SearchCtrl'
+                templateUrl: 'index.html'
             });
 
-        });
+        })
 })();

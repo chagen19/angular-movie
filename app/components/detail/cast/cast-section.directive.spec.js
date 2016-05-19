@@ -7,9 +7,9 @@ describe('Cast Section Directive Tests', function () {
     // This must be first, before providing the mock
     beforeEach(module('movieApp.movieDetail'));
 
-    // Provide Mock for theMovieDBService
+    // Provide Mock for TheMovieDBService
     beforeEach(module(function ($provide) {
-        $provide.factory('theMovieDBService', ['$q', function ($q) {
+        $provide.factory('TheMovieDBService', ['$q', function ($q) {
             function getCredits(movieId) {
                 if (passPromise) {
                     return $q.when({
@@ -49,12 +49,12 @@ describe('Cast Section Directive Tests', function () {
     // Load the HTML Template Cache
     beforeEach(module('templates'));
 
-    beforeEach(inject(function ($rootScope, _$compile_, _theMovieDBService_) {
+    beforeEach(inject(function ($rootScope, _$compile_, _TheMovieDBService_) {
         $scope = $rootScope.$new();
         $compile = _$compile_;
         $rootScope.url = url;
         $scope.movieId = movieId;
-        mockMovieSvc = _theMovieDBService_;
+        mockMovieSvc = _TheMovieDBService_;
         passPromise = true;
     }));
 

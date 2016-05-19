@@ -1,10 +1,10 @@
 <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-    <uib-slide ng-repeat="slide in backdrops | limitTo: maxSlides | orderBy:'-vote_average' track by slide.id"
+    <uib-slide ng-repeat="slide in poster.backdrops | limitTo: poster.maxSlides | orderBy:'-vote_average' track by slide.id"
                index="$index">
-        <img ng-src="{{url}}w1280{{slide.file_path}}" style="margin:auto;">
+        <img ng-src="{{poster.image_url}}w1280{{slide.file_path}}" style="margin:auto;">
         <div class="carousel-caption">
             <h5>
-                <a ng-href="{{url}}w1280{{slide.file_path}}" target="_blank">
+                <a ng-href="{{poster.image_url}}w1280{{slide.file_path}}" target="_blank">
                     View Backdrop
                 </a>
             </h5>

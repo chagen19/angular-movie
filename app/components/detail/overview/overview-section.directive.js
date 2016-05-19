@@ -3,17 +3,14 @@
  */
 (function () {
     'use strict';
-    function overviewSection() {
-        return {
-            restrict: 'E',
-            scope: {
-                movie: '='
-            },
-            templateUrl: 'components/detail/overview/overview-section.html'
-        };
-    }
 
     angular.module('movieApp.movieDetail')
-        .directive('overviewSection', overviewSection);
+        .component('overviewSection', {
+            templateUrl: 'components/detail/overview/overview-section.html',
+            controllerAs: 'overview',
+            bindings: {
+                movie: '='
+            }
+        });
 
 })();
