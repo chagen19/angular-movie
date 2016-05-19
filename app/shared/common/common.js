@@ -5,7 +5,7 @@
         function link(scope) {
             scope.$watch('currentItem', function (value) {
                 if (value === scope.totalResults - 1) {
-                    <!-- Fix to delay isotop until images are loaded -->
+                   // Fix to delay isotop until images are loaded
                     $timeout(function () {
                         scope.$emit('isotope.onLayout');
                     }, 400);
@@ -34,7 +34,7 @@
                     }
                 });
             }
-        }
+        };
     }
 
     angular.module('movieApp.common', [])

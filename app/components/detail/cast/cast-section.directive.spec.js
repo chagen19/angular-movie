@@ -39,9 +39,17 @@ describe('Cast Section Directive Tests', function () {
                     return $q.reject();
                 }
             }
+            function getImageBaseUrl() {
+                if (passPromise) {
+                    return $q.when(url);
+                } else {
+                    return $q.reject();
+                }
+            }
 
             return {
-                getCredits: getCredits
+                getCredits: getCredits,
+                getImageBaseUrl: getImageBaseUrl
             };
         }]);
     }));
@@ -88,7 +96,7 @@ describe('Cast Section Directive Tests', function () {
         it('should set cast when successfully retrieved', function () {
             spyOn(mockMovieSvc, 'getCredits').and.callThrough();
             compileDirective();
-            expect(isolateScope.cast.length).toBe(2);
+            expect(isolateScope.credits.cast.length).toBe(2);
         });
         it('should not set cast when not successfully retrieved', function () {
             spyOn(mockMovieSvc, 'getCredits').and.callThrough();
@@ -99,7 +107,7 @@ describe('Cast Section Directive Tests', function () {
         it('should have a total of 2', function () {
             spyOn(mockMovieSvc, 'getCredits').and.callThrough();
             compileDirective();
-            expect(isolateScope.total).toBe(2);
+            expect(isolateScope.credits.total).toBe(2);
         });
 
         it('should render 2 cast members', function () {

@@ -82,10 +82,19 @@ describe('Similar Section Directive Tests', function () {
                 } else {
                     return $q.reject();
                 }
+
+            }
+            function getImageBaseUrl() {
+                if (passPromise) {
+                    return $q.when(url);
+                } else {
+                    return $q.reject();
+                }
             }
 
             return {
-                getSimilarMovies: getSimilarMovies
+                getSimilarMovies: getSimilarMovies,
+                getImageBaseUrl: getImageBaseUrl
             };
         }]);
     }));
@@ -154,13 +163,5 @@ describe('Similar Section Directive Tests', function () {
             var slides = element.find('movie-card');
             expect(slides.length).toBe(5);
         });
-
-        it('should use url for images', function () {
-            spyOn(mockMovieSvc, 'getSimilarMovies').and.callThrough();
-            compileDirective();
-            var movieCard = element.find('movie-card')[0];
-            expect(movieCard).toHaveAttr("url", url);
-        });
-
     });
 });

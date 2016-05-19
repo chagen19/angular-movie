@@ -1,10 +1,10 @@
 (function () {
     'use strict';
 
-    function upcomingCtrl($rootScope, theMovieDBService) {
+    function upcomingCtrl($rootScope, TheMovieDBService) {
         var vm = this;
 
-        theMovieDBService.getUpcoming().then(function (data) {
+        TheMovieDBService.getUpcoming().then(function (data) {
             vm.results = data.results;
             vm.total = data.results.length;
             vm.total_results = data.total_results;

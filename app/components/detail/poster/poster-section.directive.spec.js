@@ -84,9 +84,16 @@ describe('Poster Section Directive Tests', function () {
                     return $q.reject();
                 }
             }
-
+            function getImageBaseUrl() {
+                if (passPromise) {
+                    return $q.when(url);
+                } else {
+                    return $q.reject();
+                }
+            }
             return {
-                getImages: getImages
+                getImages: getImages,
+                getImageBaseUrl: getImageBaseUrl
             };
         }]);
     }));
@@ -133,7 +140,7 @@ describe('Poster Section Directive Tests', function () {
         it('should set backdrops when successfully retrieved', function () {
             spyOn(mockMovieSvc, 'getImages').and.callThrough();
             compileDirective();
-            expect(isolateScope.backdrops).toBeDefined();
+            expect(isolateScope.poster.backdrops).toBeDefined();
         });
         it('should not set cast when not successfully retrieved', function () {
             spyOn(mockMovieSvc, 'getImages').and.callThrough();
@@ -145,7 +152,7 @@ describe('Poster Section Directive Tests', function () {
         it('should have a total of 7 backdrops', function () {
             spyOn(mockMovieSvc, 'getImages').and.callThrough();
             compileDirective();
-            expect(isolateScope.backdrops.length).toBe(7);
+            expect(isolateScope.poster.backdrops.length).toBe(7);
         });
 
         it('should render 7 slides', function () {
