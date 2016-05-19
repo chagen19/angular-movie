@@ -154,7 +154,7 @@ describe('Poster Section Directive Tests', function () {
             compileDirective();
             expect(isolateScope.poster.backdrops.length).toBe(7);
         });
-
+ 
         it('should render 7 slides', function () {
             spyOn(mockMovieSvc, 'getImages').and.callThrough();
             compileDirective();

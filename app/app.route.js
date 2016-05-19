@@ -4,7 +4,7 @@
         .config(function ($stateProvider, $urlRouterProvider) {
 
 
-            $urlRouterProvider.otherwise("/main");
+            $urlRouterProvider.otherwise("/upcoming");
 
             $stateProvider.state('details', {
                 url:  '/details/:movieId',
@@ -31,10 +31,6 @@
                 url: '/upcoming',
                 templateUrl: 'components/list/movie-list.html',
                 controller: 'UpcomingController as movieList'
-            }).state('main', {
-                url: '/',
-                templateUrl: 'index.html'
             });
-
-        })
+        });
 })();

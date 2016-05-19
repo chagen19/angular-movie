@@ -2,9 +2,9 @@
     'use strict';
 
     function searchController($location) {
-
-        var go = function(path) {
-          $location.path(path);
+        var vm = this;
+        vm.go = function (path) {
+            $location.path(path);
         };
     }
 

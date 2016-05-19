@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function topRatedCtrl($scope, TheMovieDBService) {
+    function topRatedCtrl(TheMovieDBService) {
         var vm = this;
         TheMovieDBService.getTopRated().then(function (data) {
             vm.results = data.results;

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function upcomingCtrl($rootScope, TheMovieDBService) {
+    function upcomingCtrl(TheMovieDBService) {
         var vm = this;
 
         TheMovieDBService.getUpcoming().then(function (data) {

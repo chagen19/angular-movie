@@ -30,7 +30,7 @@
     angular.module('movieApp')
         .config(function (InitProvider, TheMovieDBServiceProvider) {
             InitProvider.configure({profileId: 1, debug: false});
-            TheMovieDBServiceProvider.configure({cache: true})
+            TheMovieDBServiceProvider.configure({cache: true});
         })
         .run(function (Init) {
             Init.initialize();
@@ -39,4 +39,5 @@
         .value('TheMovieDBBaseUrl', 'https://api.themoviedb.org/3')
         .value('TheMovieDBApiKey', '013eff1b8075d646416de6ec45620619')
         .value('FavoriteServiceBaseUrl', 'http://localhost:3000');
+
 })();
