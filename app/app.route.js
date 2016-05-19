@@ -30,7 +30,7 @@
             }).state('upcoming', {
                 url: '/upcoming',
                 templateUrl: 'components/list/movie-list.html',
-                controller: 'TopRatedController as movieList'
+                controller: 'UpcomingController as movieList'
             }).state('main', {
                 url: '/',
                 templateUrl: 'index.html'
