@@ -20,11 +20,11 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/underscore/underscore.js',
       'bower_components/restangular/dist/restangular.js',
-      'app/app.js',
-      'app/app.*.js',
-      'app/**/*.controller.js',
-      'app/**/*.js',
-      'app/**/*.html'
+      'src/client/app/app.js',
+      'src/client/app/app.*.js',
+      'src/client/app/**/*.controller.js',
+      'src/client/app/**/*.js',
+      'src/client/app/**/*.html'
     ],
 
     // preprocess matching files before serving them to the browser

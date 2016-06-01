@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row">
+            <p>
+            <div id="castContainer" isotope-container iso-use-init-event="false">
+                <div class="isotope-item" isotope-item
+                     ng-repeat="actor in credits.cast | limitTo:maxDisplay | orderBy:'order' track by actor.cast_id"
+                     class="col-xs-2" ng:show="actor.profile_path != null">
+                        <div class="thumbnail">
+                            <img ng-src="{{credits.image_url}}h632{{actor.profile_path}}" alt="{{actor.character}} Poster"
+                                 class="img-responsive">
+                            <div class="caption">
+                                <h5>
+                                    <small>{{actor.name}}</small>
+                                </h5>
+							<span uib-tooltip="{{actor.character}}" tooltip-placement="top" tooltip-popup-delay="1000">
+								<h6>{{actor.character}}</h6>
+							</span>
+                            </div>
+                        </div>
+            </div>
+            </p>
+    </div>
+</div>

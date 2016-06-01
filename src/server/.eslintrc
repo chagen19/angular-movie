@@ -1,0 +1,16 @@
+{
+    "extends": "eslint:recommended",
+    "plugins": [
+        "jasmine"
+    ],
+    "rules": {
+        "no-console": 0
+    },
+    "env": {
+        "jasmine": true,
+        "node": true
+    },
+    "globals": {
+        "module": true
+    }
+}
