@@ -48,6 +48,6 @@
         .provider('Init', initProvider)
         .value('TheMovieDBBaseUrl', 'https://api.themoviedb.org/3')
         .value('TheMovieDBApiKey', '013eff1b8075d646416de6ec45620619')
-        .value('FavoriteServiceBaseUrl', 'http://localhost:3000');
+        .value('FavoriteServiceBaseUrl', 'http://localhost:3030');
 
 })();
