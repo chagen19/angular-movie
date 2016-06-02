@@ -12,7 +12,6 @@
     "angular-isotope": "^0.1.14",
     "restangular": "^1.5.2",
     "underscore": "^1.8.3",
-    "PACE": "pace#^1.0.2",
     "isotope": "^3.0.0",
     "font-awesome": "^4.6.3"
   },
@@ -31,7 +30,9 @@
       ]
     },
     "font-awesome": {
-      "main": ["css/font-awesome.css"]
+      "main": [
+        "css/font-awesome.css"
+      ]
     },
     "isotope": {
       "main": [
