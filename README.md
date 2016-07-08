@@ -3,6 +3,9 @@ angular-movies
 
 Angular movie app with nodejs and mongo.
 
+Prereqs
+1. Installation of node and npm
+
 Requirements
 1. node-movie project
 

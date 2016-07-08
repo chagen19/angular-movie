@@ -15,6 +15,7 @@
             'movieApp.upcoming',
             'movieApp.common',
             'ui.bootstrap',
-            'iso.directives'
+            'iso.directives',
+            'pascalprecht.translate'
         ]);
 })();

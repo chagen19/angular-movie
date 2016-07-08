@@ -28,9 +28,27 @@
     }
 
     angular.module('movieApp')
-        .config(function (InitProvider, TheMovieDBServiceProvider) {
+        .config(function (InitProvider, TheMovieDBServiceProvider, $translateProvider) {
             InitProvider.configure({profileId: 1, debug: false});
             TheMovieDBServiceProvider.configure({cache: true});
+
+            $translateProvider.translations('en', {
+                "menu.item.upcoming": 'Upcoming',
+                "menu.item.favorites": 'Favorites',
+                "menu.item.In Theatres": 'In Theatres',
+                "menu.item.toprated": 'Top Rated'
+
+            });
+
+            $translateProvider.translations('de', {
+                "menu.item.upcoming": 'Bevorstehende',
+                "menu.item.favorites": 'Favoriten',
+                "menu.item.nowplaying": 'in Theater',
+                "menu.item.toprated": 'Bestbewertet'
+            });
+            // Can override this to create a cutom function that determines the default language
+            $translateProvider.determinePreferredLanguage();
+
         })
         .run(function (Init) {
             Init.initialize();
