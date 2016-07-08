@@ -18,7 +18,7 @@
                 <div class="isotope-item" isotope-item
                      ng-repeat="movie in movieList.results | filter: movieList.filter track by movie.id"
                      ng:show="movie.poster_path != null">
-                    <p current-item='$index' total-results="{{movieList.total}}">
+                    <p>
                         <movie-card movie="movie"></movie-card>
                     </p>
                 </div>

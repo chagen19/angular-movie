@@ -15,11 +15,11 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     // The order here matters!!!!!!
     files: [
-      'bower_components/jquery/dist/jquery.js',
-      'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/underscore/underscore.js',
-      'bower_components/restangular/dist/restangular.js',
+      'src/client/bower_components/jquery/dist/jquery.js',
+      'src/client/bower_components/angular/angular.js',
+      'src/client/bower_components/angular-mocks/angular-mocks.js',
+      'src/client/bower_components/underscore/underscore.js',
+      'src/client/bower_components/restangular/dist/restangular.js',
       'src/client/app/app.js',
       'src/client/app/app.*.js',
       'src/client/app/**/*.controller.js',
@@ -30,13 +30,13 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'app/**/!(*.spec).js': ['coverage'],
-      'app/**/*.html': ['ng-html2js']
+      'src/client/app/**/!(*.spec).js': ['coverage'],
+      'src/client/app/**/*.html': ['ng-html2js']
     },
 
     // A way to pre-load the templates into the $templateCache so that they're already available when Angular asks for them, without using $http.
     ngHtml2JsPreprocessor: {
-      stripPrefix: "app/",
+      stripPrefix: "src/client/",
       moduleName: "templates"
     },
 
@@ -47,12 +47,17 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress', 'kjhtml', 'coverage'],
 
 
     junitReporter: {
       // location of results output file
       outputFile: 'test-results/junit-results.xml'
+    },
+
+    coverageReporter: {
+      type: 'html',
+      dir: 'coverage/'
     },
     // web server port
     port: 9876,
@@ -64,7 +69,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_WARN,
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes

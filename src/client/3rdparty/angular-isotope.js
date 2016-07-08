@@ -8,6 +8,7 @@
     angular.module('iso.config', [])
         .value('iso.config', {
             debug: true,
+            refreshDelay: 400,
             defaultOptions: {
                 layoutMode: 'fitRows'
             }

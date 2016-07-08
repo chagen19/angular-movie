@@ -3,17 +3,17 @@
  */
 (function () {
     'use strict';
-    var navCtrl = function($location, NavService, NAV_LINKS) {
+    var navCtrl = function($state, NavService, NAV_LINKS) {
         var vm = this;
         vm.links = NAV_LINKS;
 console.log("NAV SERVICE", NavService)
-        vm.go = function (path) {
-            NavService.activeTab = path;
-            $location.path(path);
+        vm.go = function (state) {
+            NavService.activeState = state;
+            $state.go(state);
         };
 
-        vm.isActiveTab = function(currentTab) {
-            return NavService.activeTab === currentTab;
+        vm.isActiveState = function(currentTab) {
+            return NavService.activeState === currentTab;
         } ;
     };
 
@@ -24,13 +24,13 @@ console.log("NAV SERVICE", NavService)
             controllerAs: 'nav'
         })
         .service('NavService', function (NAV_LINKS) {
-            this.activeTab = NAV_LINKS.UPCOMING;
+            this.activeState = NAV_LINKS.UPCOMING;
         })
         .constant("NAV_LINKS", {
-            "HOME": "/",
-            "FAVORITES": "/favorites",
-            "IN_THEATRES": "/now-playing",
-            "TOP_RATED": "/top-rated",
-            "UPCOMING": "/upcoming"
+            "HOME": "upcoming",
+            "FAVORITES": "favorites",
+            "IN_THEATRES": "now-playing",
+            "TOP_RATED": "top-rated",
+            "UPCOMING": "upcoming"
         });
 })();
