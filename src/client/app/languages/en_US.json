@@ -1,0 +1,15 @@
+{
+  "menu.item.upcoming": "Upcoming",
+  "menu.item.favorites": "Favorites",
+  "menu.item.nowplaying": "In Theatres",
+  "menu.item.toprated": "Top Rated",
+  "movie.search.placeholder": "Enter Movie Name",
+  "movie.search.btn.label": "Search",
+  "sort.sortby.label": "Sort By",
+  "sort.title.label": "Title",
+  "sort.releasedate.label": "Release Date",
+  "sort.rating.label": "Rating",
+  "movie.filter.placeholder": "Filter"
+
+}
+ 

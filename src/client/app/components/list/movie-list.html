@@ -6,7 +6,7 @@
         <div class="col-xs-3">
             <div class="input-group" class="pull-right">
                 <span class="input-group-addon" id="filter-addon"><i class="fa fa-filter" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" placeholder="Filter" aria-describedby="filter-addon"
+                <input type="text" class="form-control" ng-attr-placeholder="{{'movie.filter.placeholder' | translate}}" aria-describedby="filter-addon"
                        ng-model="movieList.filter">
             </div>
         </div>
@@ -18,7 +18,7 @@
                 <div class="isotope-item" isotope-item
                      ng-repeat="movie in movieList.results | filter: movieList.filter track by movie.id"
                      ng:show="movie.poster_path != null">
-                    <p current-item='$index' total-results="{{movieList.total}}">
+                    <p>
                         <movie-card movie="movie"></movie-card>
                     </p>
                 </div>

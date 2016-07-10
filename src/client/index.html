@@ -56,38 +56,39 @@
 <script src="bower_components/lodash/lodash.js"></script>
 <script src="bower_components/restangular/dist/restangular.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
-<script src="bower_components/PACE/pace.js"></script>
 <script src="bower_components/angular-translate/angular-translate.js"></script>
+<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
 
 <!-- build:js({.tmp/serve,.tmp/partials,src/client}) scripts/app.js -->
 <!-- inject:js -->
+<script src="app/components/detail/movie-detail.controller.js"></script>
+<script src="app/components/detail/trailers/trailers-section.directive.js"></script>
+<script src="app/components/detail/similar/similar-section.directive.js"></script>
+<script src="app/components/detail/poster/poster-section.directive.js"></script>
+<script src="app/components/detail/overview/overview-section.directive.js"></script>
+<script src="app/components/detail/cast/cast-section.directive.js"></script>
 <script src="app/components/list/movie-list.controller.js"></script>
 <script src="app/components/list/sort/movie-sort.directive.js"></script>
 <script src="app/components/list/card/movie-card.directive.js"></script>
 <script src="app/components/favorites/favorites.controller.js"></script>
 <script src="app/components/favorites/button/favorites-button.directive.js"></script>
-<script src="app/components/detail/movie-detail.controller.js"></script>
-<script src="app/components/detail/trailers/trailers-section.directive.js"></script>
-<script src="app/components/detail/similar/similar-section.directive.js"></script>
-<script src="app/components/detail/cast/cast-section.directive.js"></script>
-<script src="app/components/detail/poster/poster-section.directive.js"></script>
-<script src="app/components/detail/overview/overview-section.directive.js"></script>
-<script src="app/shared/themoviedb/themoviedb.service.js"></script>
 <script src="app/shared/common/common.js"></script>
+<script src="app/shared/themoviedb/themoviedb.service.js"></script>
 <script src="app/components/upcoming/upcoming.controller.js"></script>
 <script src="app/components/top_rated/top-rated.controller.js"></script>
-<script src="app/app.js"></script>
-<script src="app/components/nav/nav.directive.js"></script>
 <script src="app/components/search/movie-search.directive.js"></script>
 <script src="app/components/now_playing/now-playing.controller.js"></script>
+<script src="app/app.js"></script>
+<script src="app/components/nav/nav.directive.js"></script>
+<script src="app/components/language/language.directive.js"></script>
 <script src="app/components/favorites/favorites.service.js"></script>
 <script src="partials/templateCacheHtml.js"></script>
+<script src="3rdparty/angular-isotope.js"></script>
 <script src="app/app.run.js"></script>
 <script src="app/app.route.js"></script>
-<script src="3rdparty/angular-isotope.js"></script>
 <!-- endinject -->
 
 <!-- inject-partials:html -->

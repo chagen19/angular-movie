@@ -5,9 +5,10 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="jasmine-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="karma-jasmine-DefinitelyTyped" level="application" />
-    <orderEntry type="library" name="karma-DefinitelyTyped" level="application" />
     <orderEntry type="library" name="angular-movie node_modules" level="project" />
+    <orderEntry type="library" name="angular-ui-router-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="angular-ui-bootstrap-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="karma-DefinitelyTyped" level="application" />
+    <orderEntry type="library" name="karma-jasmine-DefinitelyTyped" level="application" />
   </component>
 </module>

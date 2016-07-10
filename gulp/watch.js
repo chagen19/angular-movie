@@ -14,7 +14,7 @@ gulp.task('watch', ['build:partials', 'inject'], function () {
 
     gulp.watch([
         'bower.json',
-        path.join(conf.paths.client, '/*.html'),
+        path.join(conf.paths.client, '**/*.html'),
         path.join('!' + conf.paths.client, '/bower_components/**/*')
     ], ['build:partials', 'inject-reload']);
 

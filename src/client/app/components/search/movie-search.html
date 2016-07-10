@@ -1,8 +1,9 @@
 <form class="navbar-form  navbar-right" ng-submit="search.go('/search/' + search.movieName)">
     <div class="input-group">
-        <input type="text" class="form-control" id="movieNameTxt" ng-model="search.movieName" placeholder="Enter Movie Name" required>
+        <input type="text" class="form-control" id="movieNameTxt" ng-model="search.movieName" ng-attr-placeholder="{{'movie.search.placeholder' | translate}}" required>
       <span class="input-group-btn">
-        <button class="btn btn-info-outline" role="submit">Search</button>
+        <button class="btn btn-info-outline" role="submit">{{'movie.search.btn.label' | translate}}</button>
       </span>
     </div>
+    <language></language>
 </form>

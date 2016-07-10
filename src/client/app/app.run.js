@@ -32,22 +32,18 @@
             InitProvider.configure({profileId: 1, debug: false});
             TheMovieDBServiceProvider.configure({cache: true});
 
-            $translateProvider.translations('en', {
-                "menu.item.upcoming": 'Upcoming',
-                "menu.item.favorites": 'Favorites',
-                "menu.item.In Theatres": 'In Theatres',
-                "menu.item.toprated": 'Top Rated'
 
+            $translateProvider.useStaticFilesLoader({
+                prefix: '/app/languages/',
+                suffix: '.json'
             });
 
-            $translateProvider.translations('de', {
-                "menu.item.upcoming": 'Bevorstehende',
-                "menu.item.favorites": 'Favoriten',
-                "menu.item.nowplaying": 'in Theater',
-                "menu.item.toprated": 'Bestbewertet'
-            });
             // Can override this to create a cutom function that determines the default language
+            //$translateProvider.preferredLanguage('en_US');
             $translateProvider.determinePreferredLanguage();
+            $translateProvider.useSanitizeValueStrategy('escapeParameters');
+
+
 
         })
         .run(function (Init) {
@@ -66,6 +62,6 @@
         .provider('Init', initProvider)
         .value('TheMovieDBBaseUrl', 'https://api.themoviedb.org/3')
         .value('TheMovieDBApiKey', '013eff1b8075d646416de6ec45620619')
-        .value('FavoriteServiceBaseUrl', 'http://localhost:3000');
+        .value('FavoriteServiceBaseUrl', 'http://localhost:3030');
 
 })();
