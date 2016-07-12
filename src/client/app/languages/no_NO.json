@@ -1,0 +1,22 @@
+{
+  "menu.item.upcoming": "Upcoming",
+  "menu.item.favorites": "Favorites",
+  "menu.item.nowplaying": "In Theatres",
+  "menu.item.toprated": "Top Rated",
+  "movie.search.placeholder": "Enter Movie Name",
+  "movie.search.btn.label": "Search",
+  "sortby.label": "Sort By",
+  "title.label": "Title",
+  "releasedate.label": "Release Date",
+  "released.label": "Released",
+  "rating.label": "Rating",
+  "movie.filter.placeholder": "Filter",
+  "movie.overview.label": "Overview",
+  "movie.trailers.label": "Trailers",
+  "movie.cast.label": "Cast",
+  "movie.similar.label": "Similar Titles",
+  "movie.synopsis.label": "Synopsis",
+  "movie.genres.label": "Genres",
+  "movie.official.website": "Official Website"
+}
+ 
