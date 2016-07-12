@@ -1,25 +1,25 @@
 <div class="btn-group" opt-kind="" ok-key="sortBy">
     <div ng:show="debug" class="alert alert-info">
         <p>
-            <i class="fa fa-info-circle"></i> Ordering by '{{ sort.orderProp }}' in {{sort.sort.sortReverse ? 'descending' : 'ascending'}} order.
+            <i class="fa fa-info-circle"></i> Ordering by '{{ sort.orderProp }}' in {{sort.sortReverse ? 'descending' : 'ascending'}} order.
         </p>
     </div>
     <p id="moreResults" ng:show="sort.total < sort.total_results">
-        <uib-alert><i class="fa fa-exclamation-triangle"></i> Showing {{total}} of {{total_results}} results found. Please refine your search criteria to get more accurate results.</uib-alert>
+        <uib-alert><i class="fa fa-exclamation-triangle"></i> Showing {{sort.total}} of {{sort.total_results}} results found. Please refine your search criteria to get more accurate results.</uib-alert>
     </p>
     <button type="button" class="btn btn-info-outline" disabled>
-        {{'sort.sortby.label' | translate}}
+        {{'sortby.label' | translate}}
     </button>
     <button type="button" class="btn btn-info-outline active" ng-attr-opt-ascending="{{!sort.sortReverse}}" ok-sel=".title"  ng-click="sort.setSortOrder('title', true)">
         <span class="fa ng-class:{'fa-sort-alpha-asc': sort.sortedAsc('title'),'fa-sort-alpha-desc': sort.sortedDesc('title')}"></span>
-        {{'sort.title.label' | translate}}
+        {{'title.label' | translate}}
     </button>
     <button type="button" class="btn btn-info-outline" ng-attr-opt-ascending="{{!sort.sortReverse}}" ok-sel=".release_date" ng-click="sort.setSortOrder('release_date', false)">
         <span class="fa ng-class:{'fa-sort-numeric-asc': sort.sortedAsc('release_date'),'fa-sort-numeric-desc': sort.sortedDesc('release_date')}"></span>
-        {{'sort.releasedate.label' | translate}}
+        {{'releasedate.label' | translate}}
     </button>
     <button type="button" class="btn btn-info-outline" ng-attr-opt-ascending="{{!sort.sortReverse}}" ok-sel=".vote_average" ng-click="sort.setSortOrder('vote_average', false)">
         <span class="fa ng-class:{'fa-sort-amount-asc': sort.sortedAsc('vote_average'),'fa-sort-amount-desc': sort.sortedDesc('vote_average')}"></span>
-        {{'sort.rating.label' | translate}}
+        {{'rating.label' | translate}}
     </button>
 </div>

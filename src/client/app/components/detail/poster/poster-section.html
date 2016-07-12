@@ -1,11 +1,11 @@
-<uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+<uib-carousel active="poster.active" interval="poster.myInterval" no-wrap="poster.noWrapSlides">
     <uib-slide ng-repeat="slide in poster.backdrops | limitTo: poster.maxSlides | orderBy:'-vote_average' track by slide.id"
                index="$index">
         <img ng-src="{{poster.image_url}}w1280{{slide.file_path}}" style="margin:auto;">
         <div class="carousel-caption">
             <h5>
                 <a ng-href="{{poster.image_url}}w1280{{slide.file_path}}" target="_blank">
-                    View Backdrop
+                    {{'view.backdrop' | translate}}
                 </a>
             </h5>
         </div>

@@ -5,11 +5,19 @@
   "menu.item.toprated": "Bestbewertet",
   "movie.search.placeholder": "Geben Sie Filmname",
   "movie.search.btn.label": "Suche",
-  "sort.sortby.label": "Sortiere nach",
-  "sort.title.label": "Titel",
-  "sort.releasedate.label": "Veröffentlichungsdatum",
-  "sort.rating.label": "Wertung",
-  "movie.filter.placeholder": "Filter"
-
+  "sortby.label": "Sortiere nach",
+  "title.label": "Titel",
+  "releasedate.label": "Veröffentlichungsdatum",
+  "released.label": "Freigegeben",
+  "rating.label": "Wertung",
+  "movie.filter.placeholder": "Filter",
+  "movie.overview.label": "Überblick",
+  "movie.trailers.label": "Trailers",
+  "movie.cast.label": "Besetzung",
+  "movie.similar.label": "Ähnliche Titel",
+  "movie.synopsis.label": "Zusammenfassung",
+  "movie.genres.label": "Genres",
+  "movie.official.website": "Offizielle Website",
+  "view.backdrop": "Ansicht Kulisse"
 
 }

@@ -5,11 +5,19 @@
   "menu.item.toprated": "Top Rated",
   "movie.search.placeholder": "Enter Movie Name",
   "movie.search.btn.label": "Search",
-  "sort.sortby.label": "Sort By",
-  "sort.title.label": "Title",
-  "sort.releasedate.label": "Release Date",
-  "sort.rating.label": "Rating",
-  "movie.filter.placeholder": "Filter"
-
+  "sortby.label": "Sort By",
+  "title.label": "Title",
+  "releasedate.label": "Release Date",
+  "released.label": "Released",
+  "rating.label": "Rating",
+  "movie.filter.placeholder": "Filter",
+  "movie.overview.label": "Overview",
+  "movie.trailers.label": "Trailers",
+  "movie.cast.label": "Cast",
+  "movie.similar.label": "Similar Titles",
+  "movie.synopsis.label": "Synopsis",
+  "movie.genres.label": "Genres",
+  "movie.official.website": "Official Website",
+  "view.backdrop": "View Backdrop"
 }
  

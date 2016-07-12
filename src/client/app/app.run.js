@@ -40,8 +40,16 @@
 
             // Can override this to create a cutom function that determines the default language
             //$translateProvider.preferredLanguage('en_US');
-            $translateProvider.determinePreferredLanguage();
-            $translateProvider.useSanitizeValueStrategy('escapeParameters');
+            $translateProvider
+                .registerAvailableLanguageKeys(['en_US', 'de_DE', 'no_NO'], {
+                    'en_*': 'en_US',
+                    'de_*': 'de_DE',
+                    'no_*': 'no_NO'
+                })
+                .determinePreferredLanguage()
+                .fallbackLanguage('en_US')
+                .useLoaderCache(true)
+                .useSanitizeValueStrategy('escapeParameters');
 
 
 

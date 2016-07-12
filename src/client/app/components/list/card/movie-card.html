@@ -5,8 +5,8 @@
         <span uib-tooltip="{{card.movie.title}}" tooltip-placement="top" tooltip-popup-delay="1000">
             <h5 class="title">{{card.movie.title}}</h5>
         </span>
-        <h6 class="vote_average">Rating: {{card.movie.vote_average|| '0'}} / 10</h6>
-        <h6 class="release_date">Released: {{card.movie.release_date}}</h6>
+        <h6 class="vote_average">{{'rating.label' | translate}}: {{card.movie.vote_average|| '0'}} / 10</h6>
+        <h6 class="release_date">{{'released.label' | translate}}: {{card.movie.release_date}}</h6>
         <favorite-button movie="card.movie"></favorite-button>
     </div>
 </div>

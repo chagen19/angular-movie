@@ -16,7 +16,7 @@
                         <uib-rating ng-model="movie.data.vote_average" max="10" read-only="true"></uib-rating> ({{movie.data.vote_average}})
                         <blockquote>
                             <p class="lead" ng-show="movie.data.tagline">"{{movie.data.tagline}}"</p>
-                            <footer ng-show="movie.data.homepage">Official Website: <cite title="Source Title"><a href="{{movie.data.homepage}}" target="_blank">{{movie.data.homepage}}</a></cite></footer>
+                            <footer ng-show="movie.data.homepage"><span translate>movie.official.website</span> <cite title="Source Title"><a href="{{movie.data.homepage}}" target="_blank">{{movie.data.homepage}}</a></cite></footer>
                         </blockquote>
                         <div></div>
 
@@ -24,16 +24,16 @@
                 </div>
 
                 <uib-tabset active="active">
-                    <uib-tab index="0" heading="Overview">
+                    <uib-tab index="0" heading="{{'movie.overview.label' | translate}}">
                         <overview-section movie="movie.data"></overview-section>
                     </uib-tab>
-                    <uib-tab index="1" heading="Trailers" select="movie.reInitIso()">
+                    <uib-tab index="1" heading="{{'movie.trailers.label' | translate}}" select="movie.reInitIso()">
                         <trailers-section movie-id="{{movie.movieId}}"></trailers-section>
                     </uib-tab>
-                    <uib-tab index="2" heading="Cast" select="movie.reInitIso()">
+                    <uib-tab index="2" heading="{{'movie.cast.label' | translate}}" select="movie.reInitIso()">
                         <cast-section movie-id="{{movie.movieId}}"></cast-section>
                     </uib-tab>
-                    <uib-tab index="3" heading="Similar Titles" select="movie.reInitIso()">
+                    <uib-tab index="3" heading="{{'movie.similar.label' | translate}}" select="movie.reInitIso()">
                         <p style="margin-top: 20px">
                             <similar-section movie-id="{{movie.movieId}}"></similar-section>
                         </p>
